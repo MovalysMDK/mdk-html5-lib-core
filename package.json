@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "svn",
-    "url": "svn+http://svndav.adeuza.fr/Movalys/com/adeuza/movalysfwk/html5/mdk-html5-core/branches/Cotopaxi/"
+    "url": "svn+http://svndav.adeuza.fr/Movalys/com/adeuza/movalysfwk/html5/mdk-html5-core/"
   },
   "keywords": [
     "mdk",

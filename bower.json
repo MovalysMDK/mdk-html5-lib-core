@@ -2,8 +2,8 @@
   "name": "mdk-html5-core-svn",
   "version": "1.0.0",
   "repository": {
-    "type": "git",
-    "url": "svn+http://svndav.adeuza.fr/Movalys/com/adeuza/movalysfwk/html5/mdk-html5-core/branches/Cotopaxi/"
+    "type": "svn",
+    "url": "svn+http://svndav.adeuza.fr/Movalys/com/adeuza/movalysfwk/html5/mdk-html5-core/"
   },
   "description": "MDK HTML 5 Core Framework",
   "json": "bower.json",

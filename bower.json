@@ -1,5 +1,5 @@
 {
-  "name": "mdk-html5-core-svn",
+  "name": "mdk-html5-core",
   "version": "1.0.0",
   "repository": {
     "type": "svn",

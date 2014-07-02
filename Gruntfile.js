@@ -21,15 +21,6 @@ module.exports = function(grunt) {
         gruntfile: {
             src: './Gruntfile.js'
         }
-    },
-
-    sass: {
-      main: {
-          src: ['assets/styles/*.scss'],
-          options: {
-              check: true
-          }
-      }
     }
 
   });
@@ -38,7 +29,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'jshint',
-    'sass',
     'updateBower'
   ]);
 

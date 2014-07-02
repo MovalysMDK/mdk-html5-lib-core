@@ -6,8 +6,6 @@
   "homepage": "http://git.adeuza.fr/mdk-html5-core",
   "description": "MDK HTML5 Core Framework",
   "main": [
-    "dist/js/mdk-html5-ui.js",
-    "dist/js/mdk-html5-ui.css"
   ],
   "repository": {
     "type": "svn",
@@ -19,25 +17,14 @@
     "core",
     "framework"
   ],
-  "author": "Sopra Group",
+  "author": "Sopra",
   "license": "BSD",
   "devDependencies": {
-    "dgeni": "0.3.0",
-    "dgeni-packages": "0.9.3",
     "grunt": "0.4.5",
-    "grunt-bump": "0.0.14",
-    "grunt-contrib-clean": "0.5.0",
-    "grunt-contrib-concat": "0.4.0",
-    "grunt-contrib-copy": "0.5.0",
+    "load-grunt-tasks": "0.6.0",
+    "grunt-contrib-sass": "0.7.3",
     "grunt-contrib-jshint": "0.10.0",
-    "grunt-contrib-uglify": "0.5.0",
-    "grunt-contrib-watch": "0.6.1",
-    "grunt-conventional-changelog": "1.1.0",
-    "grunt-ddescribe-iit": "0.0.4",
-    "grunt-merge-conflict": "0.0.2",
-    "grunt-remove-logging": "0.2.0",
-    "grunt-string-replace": "0.2.7",
-    "load-grunt-tasks": "0.6.0"
+    "jshint-stylish": "0.2.0"
   },
   "ignore": [
     "**/.*"

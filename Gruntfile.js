@@ -37,10 +37,13 @@ module.exports = function(grunt) {
 
     var bowerObj = JSON.parse(grunt.file.read(bowerFile));
     bowerObj.main = [];
+    bowerObj.main.push('lib/mfcoreModule.js');
 
     this.data.src.forEach(function(pattern) {
       grunt.file.expand(pattern).forEach( function(file) {
-        bowerObj.main.push(file);
+        if ( file !== 'lib/mfcoreModule.js') {
+          bowerObj.main.push(file);
+        }
       });
     });
   

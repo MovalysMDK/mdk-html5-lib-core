@@ -6,6 +6,7 @@
     "url": "svn+http://svndav.adeuza.fr/Movalys/com/adeuza/movalysfwk/html5/mdk-html5-core/"
   },
   "main": [
+    "lib/mfcoreModule.js",
     "lib/actions/MFActionLauncher.js",
     "lib/actions/MFBaseAction.js",
     "lib/actions/MFDataFromFile.js",
@@ -16,7 +17,6 @@
     "lib/actions/MFImportBaseAction.js",
     "lib/actions/MFLoadFileToSessionStorageAction.js",
     "lib/actions/MFResetBaseAction.js",
-    "lib/actions/MFUpdateVMWithDataLoaderAction.js",
     "lib/actions/context/MFContext.js",
     "lib/actions/context/MFContextFactory.js",
     "lib/data/dal/MFDalNoSqlProxy.js",
@@ -29,7 +29,6 @@
     "lib/data/dal/sqlite/MFDalSqliteWindows8.js",
     "lib/data/dal/sqlite/MFDalSqliteWp8.js",
     "lib/data/dal/websql/MFDalWebSql.js",
-    "lib/data/dao/MFDaoAbstract.js",
     "lib/data/dao/MFDaoNoSqlAbstract.js",
     "lib/data/dao/MFDaoProxyAbstract.js",
     "lib/data/dao/MFDaoSqlAbstract.js",
@@ -107,13 +106,20 @@
     "lib/utils/exceptions/MFException.js",
     "lib/utils/exceptions/MFSynchroException.js",
     "lib/utils/exceptions/MobileFwkException.js",
-    "lib/utils/exceptions/NotImplementedException.js",
-    "lib/utils/swipe.js"
+    "lib/utils/exceptions/NotImplementedException.js"
   ],
   "description": "MDK HTML 5 Core Framework",
   "json": "bower.json",
   "dependencies": {
-    "angular": "1.2.18"
+    "angular": "1.2.18",
+    "angular-resource": "1.2.18",
+    "angular-translate": "2.0.1",
+    "angular-translate-loader-static-files": "2.0.0",
+    "angular-translate-storage-local": "2.0.0",
+    "angular-translate-handler-log": "2.0.0",
+    "angular-spinner-loading": "*",
+    "stacktrace": "0.6.0",
+    "ngCordova": "0.1.2-alpha"
   },
   "devDependencies": {
     "angular-mocks": "1.2.18",

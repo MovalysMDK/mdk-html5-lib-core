@@ -1,0 +1,35 @@
+{
+        "ObjectToSynchronize":
+            {
+                "keyPath": "id",
+                "createIndex": [
+                    {
+                        "name": "objectIdIndex",
+                        "keyPath": "objectId",
+                        "unique": false
+                    },
+                    {
+                        "name": "objectNameIndex",
+                        "keyPath": "objectName",
+                        "unique": false
+                    }
+                ]
+            },
+ "Parameters":
+            {
+                "keyPath": "id",
+                "createIndex": [
+                    {
+                        "name": "nameIndex",
+                        "keyPath": "name",
+                        "unique": true
+                    },
+                    {
+                        "name": "valueIndex",
+                        "keyPath": "value",
+                        "unique": true
+                    }
+                ]
+            }
+ }
+

@@ -1,0 +1,58 @@
+{
+    "synchronizationMaxTimeWithoutSync":"172800",
+    "dataBaseType":{
+        "web":[
+            {
+                "version": "",
+                "comparator":"*",
+                "database":"WEBSQL"
+            }
+        ],
+        "android":[
+            {
+                "version": "",
+                "comparator":"*",
+                "database":"WEBSQL"
+            },
+            {
+                "version": "4.4",
+                "comparator":">=",
+                "database":"NOSQL"
+            },
+            {
+                "version": "4.4",
+                "comparator":">=",
+                "database":"WEBSQL"
+            },
+            {
+                "version": "",
+                "comparator":"*",
+                "database":"WEBSQL"
+            }
+        ],
+        "ios": [
+            {
+                "version": "",
+                "comparator":"*",
+                "database":"WEBSQL"
+            }
+        ],
+        "wp8": [
+            {
+                "version": "",
+                "comparator":"*",
+                "database":"NOSQL"
+            }
+        ],
+        "windows8": [
+            {
+                "version": "",
+                "comparator":"*",
+                "database":"NOSQL"
+            }
+        ]
+    },
+	"logLevel": "VERBOSE",
+    "notificationsTimeout": 5000,
+    "actionTimeout": 2
+}

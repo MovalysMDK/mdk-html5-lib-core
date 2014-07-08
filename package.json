@@ -1,7 +1,7 @@
 {
   "name": "mdk-html5-core",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.0",
   "codename": "Cotopaxi",
   "homepage": "http://git.adeuza.fr/mdk-html5-core",
   "description": "MDK HTML5 Core Framework",

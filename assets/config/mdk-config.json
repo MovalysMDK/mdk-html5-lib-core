@@ -53,6 +53,6 @@
         ]
     },
 	"logLevel": "VERBOSE",
-    "notificationsTimeout": 5000,
+    "notificationsTimeout": 8000,
     "actionTimeout": 2
 }

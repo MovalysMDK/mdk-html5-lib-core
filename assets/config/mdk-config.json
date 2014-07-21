@@ -1,56 +1,99 @@
 {
     "synchronizationMaxTimeWithoutSync":"172800",
     "dataBaseType":{
-        "web":[
-            {
-                "version": "",
-                "comparator":"*",
-                "database":"WEBSQL"
-            }
-        ],
-        "android":[
-            {
-                "version": "",
-                "comparator":"*",
-                "database":"WEBSQL"
-            },
-            {
-                "version": "4.4",
-                "comparator":">=",
-                "database":"NOSQL"
-            },
-            {
-                "version": "4.4",
-                "comparator":">=",
-                "database":"WEBSQL"
-            },
-            {
-                "version": "",
-                "comparator":"*",
-                "database":"WEBSQL"
-            }
-        ],
-        "ios": [
-            {
-                "version": "",
-                "comparator":"*",
-                "database":"WEBSQL"
-            }
-        ],
-        "wp8": [
-            {
-                "version": "",
-                "comparator":"*",
-                "database":"NOSQL"
-            }
-        ],
-        "windows8": [
-            {
-                "version": "",
-                "comparator":"*",
-                "database":"NOSQL"
-            }
-        ]
+        "browser": {
+            "web": [
+                {
+                    "version": "",
+                    "comparator": "*",
+                    "database": "WEBSQL"
+                }
+            ],
+            "chrome": [
+                {
+                    "version": "23",
+                    "comparator": ">=",
+                    "database": "NOSQL"
+                },
+                {
+                    "version": "",
+                    "comparator": "*",
+                    "database": "WEBSQL"
+                }
+            ],
+            "safari": [
+                {
+                    "version": "8",
+                    "comparator": ">=",
+                    "database": "NOSQL"
+                },
+                {
+                    "version": "",
+                    "comparator": "*",
+                    "database": "WEBSQL"
+                }
+            ],
+            "ie": [
+                {
+                    "version": "10",
+                    "comparator": ">=",
+                    "database": "NOSQL"
+                }
+            ],
+            "firefox": [
+                {
+                    "version": "10",
+                    "comparator": ">=",
+                    "database": "NOSQL"
+                }
+            ]
+        },
+        "native": {
+            "android":[
+                {
+                    "version": "",
+                    "comparator":"*",
+                    "database":"WEBSQL"
+                },
+                {
+                    "version": "4.4",
+                    "comparator":">=",
+                    "database":"NOSQL"
+                },
+                {
+                    "version": "4.4",
+                    "comparator":">=",
+                    "database":"WEBSQL"
+                },
+                {
+                    "version": "",
+                    "comparator":"*",
+                    "database":"WEBSQL"
+                }
+            ],
+            "ios": [
+                {
+                    "version": "",
+                    "comparator":"*",
+                    "database":"WEBSQL"
+                }
+            ],
+            "wp8": [
+                {
+                    "version": "",
+                    "comparator":"*",
+                    "database":"NOSQL"
+                }
+            ],
+            "windows8": [
+                {
+                    "version": "",
+                    "comparator":"*",
+                    "database":"NOSQL"
+                }
+            ]
+        }
+
     },
 	"logLevel": "VERBOSE",
     "notificationsTimeout": 8000,

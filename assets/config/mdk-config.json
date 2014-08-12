@@ -6,7 +6,7 @@
                 {
                     "version": "",
                     "comparator": "*",
-                    "database": "WEBSQL"
+                    "database": "UNKNOWN"
                 }
             ],
             "chrome": [

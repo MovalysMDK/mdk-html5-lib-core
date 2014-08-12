@@ -4,8 +4,7 @@
         "browser": {
             "default": [
                 {
-                    "version": "",
-                    "comparator": "*",
+                    "version": "*",
                     "database": "UNKNOWN"
                 }
             ],
@@ -16,8 +15,7 @@
                     "database": "NOSQL"
                 },
                 {
-                    "version": "",
-                    "comparator": "*",
+                    "version": "*",
                     "database": "WEBSQL"
                 }
             ],
@@ -28,8 +26,7 @@
                     "database": "NOSQL"
                 },
                 {
-                    "version": "",
-                    "comparator": "*",
+                    "version": "*",
                     "database": "WEBSQL"
                 }
             ],
@@ -56,8 +53,7 @@
                     "database":"NOSQL"
                 },
                 {
-                    "version": "",
-                    "comparator":"*",
+                    "version": "*",
                     "database":"WEBSQL"
                 }
             ],
@@ -68,22 +64,19 @@
                     "database":"NOSQL"
                 },
                 {
-                    "version": "",
-                    "comparator":"*",
+                    "version": "*",
                     "database":"WEBSQL"
                 }
             ],
             "wp8": [
                 {
-                    "version": "",
-                    "comparator":"*",
+                    "version": "*",
                     "database":"NOSQL"
                 }
             ],
             "windows8": [
                 {
-                    "version": "",
-                    "comparator":"*",
+                    "version": "*",
                     "database":"NOSQL"
                 }
             ]

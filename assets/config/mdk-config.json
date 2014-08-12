@@ -2,7 +2,7 @@
     "synchronizationMaxTimeWithoutSync":"172800",
     "dataBaseType":{
         "browser": {
-            "web": [
+            "default": [
                 {
                     "version": "",
                     "comparator": "*",

@@ -31,7 +31,9 @@
         "Windows": false,
         "FastClick": false,
         "SQLite3JS": false,
-        "module" :false
+        "module" :false,
+        "UAParser":false,
+        "Modernizr":false
     },
     "browser": true,
     "devel":true,

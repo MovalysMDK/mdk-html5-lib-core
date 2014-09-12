@@ -130,13 +130,13 @@
     "angular-mocks": "~1.2.24",
     "angular-scenario": "~1.2.24"
   },
-    "overrides": {
-        "modernizr": {
-            "main": "modernizr.js"
-        },
-        "ngCordova": {
-            "main": "dist/ng-cordova.min.js"
-        }
+  "overrides": {
+    "modernizr": {
+      "main": "modernizr.js"
     },
-    "private": true
+    "ngCordova": {
+      "main": "dist/ng-cordova.min.js"
+    }
+  },
+  "private": true
 }

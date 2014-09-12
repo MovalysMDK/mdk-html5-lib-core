@@ -113,8 +113,8 @@
   "description": "MDK HTML 5 Core Framework",
   "json": "bower.json",
   "dependencies": {
-    "angular": "~1.2.22",
-    "angular-resource": "~1.2.22",
+    "angular": "~1.2.24",
+    "angular-resource": "~1.2.24",
     "angular-translate": "~2.2.0",
     "angular-translate-loader-static-files": "~2.2.0",
     "angular-translate-storage-local": "~2.2.0",
@@ -127,8 +127,8 @@
     "modernizr": "~2.8.3"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.22",
-    "angular-scenario": "~1.2.22"
+    "angular-mocks": "~1.2.24",
+    "angular-scenario": "~1.2.24"
   },
     "overrides": {
         "modernizr": {

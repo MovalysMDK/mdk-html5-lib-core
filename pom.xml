@@ -12,7 +12,7 @@
 	<inceptionYear>2014</inceptionYear>
 	<description>MDK HTML5 Core</description>
 	<issueManagement>
-		<url>http://mantis.adeuza.fr</url>
+		<url>http://mantis.ntes.fr.sopra</url>
 	</issueManagement>
 	<scm>
 		<connection>scm:svn:http://svn.ntes.fr.sopra/svnpolemobility/svn/Movalys/repository/com/adeuza/movalysfwk/html5/mdk-html5-core/branches/Cotopaxi</connection>

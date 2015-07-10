@@ -1,7 +1,7 @@
 {
   "name": "mdk-html5-core",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.0-BETA2",
   "codename": "Cotopaxi",
   "homepage": "http://git.ntes.fr.sopra/mdk-html5-core",
   "description": "MDK HTML5 Core Framework",

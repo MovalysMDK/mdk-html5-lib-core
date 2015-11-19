@@ -138,5 +138,8 @@
       "main": "dist/ng-cordova.min.js"
     }
   },
-  "private": true
+  "private": true,
+  "resolutions": {
+    "angular": "1.4.3"
+  }
 }

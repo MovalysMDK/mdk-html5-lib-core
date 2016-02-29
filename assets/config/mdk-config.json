@@ -1,0 +1,6 @@
+{
+    "synchronizationMaxTimeWithoutSync":"172800",
+	"logLevel": "VERBOSE",
+    "notificationsTimeout": 8000,
+    "actionTimeout": 10
+}

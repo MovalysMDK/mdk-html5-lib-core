@@ -1,0 +1,40 @@
+{
+  "name": "mdk-html5-lib-core",
+  "private": false,
+  "version": "1.3.0-SNAPSHOT",
+  "codename": "Cotopaxi",
+  "homepage": "https://github.com/MovalysMDK/mdk-html5-lib-core",
+  "description": "MDK HTML5 Core Framework",
+  "main": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MovalysMDK/mdk-html5-lib-core"
+  },
+  "keywords": [
+    "mdk",
+    "html5",
+    "core",
+    "framework"
+  ],
+  "author": "Sopra Steria Group",
+  "license": "LGPL-3.0",
+  "devDependencies": {
+    "fs": "0.0.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.2",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "jshint-stylish": "^2.0.1",
+    "load-grunt-tasks": "^3.1.0",
+    "through2": "^2.0.0"
+  },
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jsonfile": "^2.2.3"
+  }
+}

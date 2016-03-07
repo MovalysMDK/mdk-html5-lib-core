@@ -23,6 +23,7 @@
     "lib/data/dal/MFDatabaseTypeSelector.js",
     "lib/data/dal/nosql/MFDalIndexedDB.js",
     "lib/data/dal/nosql/MFDalIndexedDBTransaction.js",
+    "lib/data/dal/sqlite/MFDalSqlite.js",
     "lib/data/dal/sqlite/MFDalSqliteAndroid.js",
     "lib/data/dal/sqlite/MFDalSqliteIos.js",
     "lib/data/dal/sqlite/MFDalSqliteWindows8.js",

@@ -20,8 +20,8 @@ var gulp = require('gulp'),
     through = require('through2'),
     jsonfile = require('jsonfile'),
     gutil = require('gulp-util'),
-    jshint = require('gulp-jshint');
-
+    jshint = require('gulp-jshint'),
+    Server = require('karma').Server;
 
 gulp.task('jshint', function () {
 
@@ -34,6 +34,16 @@ gulp.task('jshint', function () {
  * Default task, if no parameter given
  */
 gulp.task('default', ['jshint', 'updateBower']);
+
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/test/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 /**
  * update the bower.json adding all the js files present in the project.

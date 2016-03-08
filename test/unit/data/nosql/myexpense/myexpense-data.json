@@ -1,0 +1,259 @@
+{
+  "Customer": [
+    {
+      "id": 1,
+      "name": "Proin Industries",
+      "address": {
+        "latitude": 79.99217,
+        "longitude": -24.80399,
+        "compl": "KN",
+        "street": "Ap #591-4393 Eros. Street",
+        "city": "Kano",
+        "country": "Rwanda"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Feugiat Industries",
+      "address": {
+        "latitude": -71.84122,
+        "longitude": -161.28301,
+        "compl": "Île-de-France",
+        "street": "Ap #247-9147 Tempus Rd.",
+        "city": "Vitry-sur-Seine",
+        "country": "Pakistan"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Sed Dolor Fusce Associates",
+      "address": {
+        "latitude": 71.52096,
+        "longitude": -179.64734,
+        "compl": "Drenthe",
+        "street": "P.O. Box 127, 1753 Commodo Av.",
+        "city": "Emmen",
+        "country": "Canada"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Placerat Eget Inc.",
+      "address": {
+        "latitude": 36.03352,
+        "longitude": 70.78868,
+        "compl": "Maryland",
+        "street": "P.O. Box 551, 5476 Senectus Avenue",
+        "city": "Frederick",
+        "country": "Gabon"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Pede Corp.",
+      "address": {
+        "latitude": -75.23096,
+        "longitude": -101.19252,
+        "compl": "RO",
+        "street": "Ap #180-3980 Ut, Road",
+        "city": "Roxburgh",
+        "country": "Taiwan"
+      }
+    }
+  ],
+  "ExpenseType": [
+    {
+      "id": 1,
+      "description": "Hotel",
+      "amountmax": 78,
+      "category": "1"
+    },
+    {
+      "id": 2,
+      "description": "Hotel + Breakfast",
+      "amountmax": 90,
+      "category": "1"
+    },
+    {
+      "id": 3,
+      "description": "Train",
+      "amountmax": null,
+      "category": "3"
+    },
+    {
+      "id": 4,
+      "description": "Parking",
+      "amountmax": null,
+      "category": "4"
+    },
+    {
+      "id": 5,
+      "description": "Car rental",
+      "amountmax": null,
+      "category": "4"
+    },
+    {
+      "id": 6,
+      "description": "Meal",
+      "amountmax": 21,
+      "category": "2"
+    },
+    {
+      "id": 7,
+      "description": "Other",
+      "amountmax": null,
+      "category": "5"
+    }
+  ],
+  "Report": [
+    {
+      "id": 1,
+      "customerid": 1,
+      "date": "2016-12-29 00:00:00",
+      "reason": "urna. Vivamus molestie",
+      "state": "2",
+      "amounttotal": 185
+    },
+    {
+      "id": 2,
+      "customerid": 1,
+      "date": "2016-02-16 00:00:00",
+      "reason": "libero dui",
+      "state": "1",
+      "amounttotal": 114
+    },
+    {
+      "id": 3,
+      "customerid": 2,
+      "date": "2016-09-25 00:00:00",
+      "reason": "accumsan",
+      "state": "2",
+      "amounttotal": 126
+    },
+    {
+      "id": 4,
+      "customerid": 3,
+      "date": "2016-10-28 00:00:00",
+      "reason": "ridiculus",
+      "state": "3",
+      "amounttotal": 145
+    },
+    {
+      "id": 5,
+      "customerid": 4,
+      "date": "2016-06-04 00:00:00",
+      "reason": "sagittis. Nullam",
+      "state": "2",
+      "amounttotal": 206
+    },
+    {
+      "id": 6,
+      "customerid": 5,
+      "date": "2015-12-29 00:00:00",
+      "reason": "purus gravida sagittis.",
+      "state": "1",
+      "amounttotal": 234
+    },
+    {
+      "id": 7,
+      "customerid": 5,
+      "date": "2016-03-15 00:00:00",
+      "reason": "sodales at, velit.",
+      "state": "2",
+      "amounttotal": 217
+    },
+    {
+      "id": 8,
+      "customerid": 5,
+      "date": "2016-03-16 00:00:00",
+      "reason": "consectetuer rhoncus. Nullam",
+      "state": "3",
+      "amounttotal": 151
+    },
+    {
+      "id": 9,
+      "customerid": 2,
+      "date": "2016-02-24 00:00:00",
+      "reason": "accumsan convallis,",
+      "state": "2",
+      "amounttotal": 106
+    }
+  ],
+  "Expense": [
+    {
+      "id": 1,
+      "typeid": 3,
+      "reportid": 1,
+      "description": "Lorem ipsum",
+      "amount": 48,
+      "state": "1",
+      "photo": {
+        "name": "IMG1",
+        "uri": "IMG1.JPG",
+        "date": "2016-09-30 00:00:00",
+        "desc": "receipt",
+        "photostate": "1"
+      }
+    },
+    {
+      "id": 2,
+      "typeid": 5,
+      "reportid": 2,
+      "description": "Lorem",
+      "amount": 17,
+      "state": "1",
+      "photo": {
+        "name": "IMG2",
+        "uri": "IMG2.JPG",
+        "date": "2016-12-07 00:00:00",
+        "desc": "bill",
+        "photostate": "1"
+      }
+    },
+    {
+      "id": 3,
+      "typeid": 2,
+      "reportid": 3,
+      "description": "Lorem ipsum dolor",
+      "amount": 33,
+      "state": "1",
+      "photo": {
+        "name": "IMG3",
+        "uri": "IMG3.JPG",
+        "date": "2016-09-15 00:00:00",
+        "desc": "ticket",
+        "photostate": "1"
+      }
+    },
+    {
+      "id": 4,
+      "typeid": 6,
+      "reportid": 4,
+      "description": "Lorem ipsum dolor",
+      "amount": 42,
+      "state": "2",
+      "photo": {
+        "name": "IMG4",
+        "uri": "IMG4.JPG",
+        "date": "2016-04-12 00:00:00",
+        "desc": "receipt",
+        "photostate": "1"
+      }
+    },
+    {
+      "id": 5,
+      "typeid": 1,
+      "reportid": 5,
+      "description": "Lorem ipsum dolor sit",
+      "amount": 68,
+      "state": "2",
+      "photo": {
+        "name": "IMG5",
+        "uri": "IMG5.JPG",
+        "date": "2016-05-15 00:00:00",
+        "desc": "bill",
+        "photostate": "1"
+      }
+    }
+  ]
+}

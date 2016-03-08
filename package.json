@@ -19,15 +19,15 @@
   "author": "Sopra Steria Group",
   "license": "LGPL-3.0",
   "devDependencies": {
-    "fs": "0.0.2",
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.11.2",
-    "gulp": "^3.9.0",
-    "gulp-jshint": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "jshint-stylish": "^2.0.1",
-    "load-grunt-tasks": "^3.1.0",
-    "through2": "^2.0.0"
+    "gulp": "3.9.0",
+    "gulp-jshint": "2.0.0",
+    "gulp-util": "3.0.7",
+    "jasmine-core": "2.4.1",
+    "jshint-stylish": "2.0.1",
+    "karma": "0.13.19",
+    "karma-chrome-launcher": "0.2.2",
+    "karma-jasmine": "0.3.7",
+    "through2": "2.0.0"
   },
   "ignore": [
     "**/.*",
@@ -35,6 +35,6 @@
     "package.json"
   ],
   "dependencies": {
-    "jsonfile": "^2.2.3"
+    "jsonfile": "2.2.3"
   }
 }

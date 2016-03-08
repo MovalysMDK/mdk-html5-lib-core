@@ -1,0 +1,26 @@
+{
+    "Expense": {
+        "keyPath": "id",
+        "createIndex": [{
+            "name": "reportid",
+            "keyPath": "reportid",
+            "unique": false
+        }]
+    },
+    "Customer": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Report": {
+        "keyPath": "id",
+        "createIndex": [{
+            "name": "customerid",
+            "keyPath": "customerid",
+            "unique": false
+        }]
+    },
+    "ExpenseType": {
+        "keyPath": "id",
+        "createIndex": []
+    }
+}

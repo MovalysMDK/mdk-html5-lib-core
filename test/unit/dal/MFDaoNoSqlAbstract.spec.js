@@ -44,7 +44,7 @@ describe('MFDaoNoSqlAbstract', function() {
   beforeEach(function(done) {
       var delRequest = indexedDB.deleteDatabase(dbName);
       
-      delRequest.onsuccess = function( event ){
+      delRequest.onsuccess = function( event ) {
         // Check database is deleted
         var request = indexedDB.open(dbName, 1);
         request.onupgradeneeded = function (event) {
@@ -53,19 +53,23 @@ describe('MFDaoNoSqlAbstract', function() {
           event.target.transaction.abort(); // This should call onerror
         };
         //callback error db
+        request.onblocked = function (event) {
+          done();
+        };
+        //callback error db
         request.onerror = function (event) {
-          // We leave here as aborting the transaction will lead here.
           done();
         };
         //callback success db
         request.onsuccess = function (event) {
             fail(event.target.webkitErrorMessage || event.target.errorCode);
-        };      
-        request.onblocked = function (event) {
-            console.log('BLOCKED');
-            done();
-        };       
+        };     
       };
+            
+      delRequest.onblocked = function (event) {
+          // After 1st test we should pass here
+          done();
+      };  
       
       delRequest.onerror = function(event){
         fail('Couldn\'t delete ' + dbName);
@@ -119,7 +123,7 @@ describe('MFDaoNoSqlAbstract', function() {
         expect(entity).not.toBeNull();
         if (entity) { // 
           expect(entity.name).toEqual('Sed Dolor Fusce Associates');
-          expect(entity.reports).toBeUndefined();
+          expect(entity.reports.length).toEqual(0);
         }
         
         done();
@@ -130,31 +134,63 @@ describe('MFDaoNoSqlAbstract', function() {
     });
   });
   
-  it('should get a record by its ID (cascade)', function(done) {
+  it('should get a record by its ID (cascade 1 level)', function(done) {
     inject(function(MFContextFactory, MFDalIndexedDB, MFSystem, CustomerDaoNoSql, MFDalNoSqlProxy) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
       
-      CustomerDaoNoSql._getRecordById(3,context,[]).then(function(entity) {
+      CustomerDaoNoSql._getRecordById(1,context,['reports']).then(function(entity) {
         expect(entity).not.toBeNull();
-        if (entity) { // 
-          expect(entity.name).toEqual('Sed Dolor Fusce Associates');
-          expect(entity.reports).toBeUndefined();
+        if (entity) { // Avoid crashing when entity is null (even if we test it above, it will crash)
+          expect(entity.name).toEqual('Proin Industries');
+          // First level: reports
+          expect(entity.reports.length).toEqual(2);
+          // Second level: expenses 
+          expect(entity.reports[0].expenses.length).toEqual(0);
         }
         
         done();
       });
-      
       // Resolve promises and http requests 
       $rootScope.$apply();
     });
   });
   
+  it('should get a record by its ID (cascade 2 levels)', function(done) {
+    inject(function(MFContextFactory, MFDalIndexedDB, MFSystem, CustomerDaoNoSql, MFDalNoSqlProxy) {
+      tx = MFDalNoSqlProxy.openTransaction();
+      var context = MFContextFactory.createInstance();
+      context.dbTransaction = tx;
+      
+      CustomerDaoNoSql._getRecordById(1,context,['reports','expenses']).then(function(entity) {
+        expect(entity).not.toBeNull();
+        if (entity) { // Avoid crashing when entity is null (even if we test it above, it will crash)
+          expect(entity.name).toEqual('Proin Industries');
+          // First level: reports
+          expect(entity.reports.length).toEqual(2);
+          // Second level: expenses 
+          expect(entity.reports[0].expenses.length).toEqual(1);
+        }
+        
+        done();
+      });
+      // Resolve promises and http requests 
+      $rootScope.$apply();
+    });
+  });
   
   afterEach(function(done) {
-    inject(function(MFDalIndexedDBTransaction) {
-      waitUntil(function() { console.error(MFDalIndexedDBTransaction.startedTransactions.length);return MFDalIndexedDBTransaction.startedTransactions.length ===0; }).then(function() {done();});
+    inject(function(MFDalIndexedDB, MFDalIndexedDBTransaction) {
+      waitUntil(function() {
+        console.error(MFDalIndexedDBTransaction.startedTransactions.length);
+        return MFDalIndexedDBTransaction.startedTransactions.length === 0; 
+      }, 500).then(
+          function() {
+            MFDalIndexedDB.closeDatabase();
+            done();
+          }
+        );
     });
   });
 });

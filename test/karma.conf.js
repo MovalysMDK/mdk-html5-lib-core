@@ -22,6 +22,7 @@ module.exports = function(config) {
       'test/unit/data/nosql/myexpense/converters/*.js',
       'test/unit/data/nosql/myexpense/dao/*.js',
       'test/unit/data/nosql/myexpense/model/*.js',
+      'test/unit/data/nosql/myexpense/model/cascades/*.js',
       'lib/**/*.js',
       'test/**/*.spec.js',
       'test/unit/tools.js',

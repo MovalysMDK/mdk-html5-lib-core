@@ -1,6 +1,6 @@
 'use strict';
 
-describe('MFDaoNoSqlAbstract', function() {
+xdescribe('MFDaoNoSqlAbstract', function() {
   var dbName = 'MFDaoNoSqlAbstract' ;
   var $q, $rootScope, $httpBackend;
   var tx;

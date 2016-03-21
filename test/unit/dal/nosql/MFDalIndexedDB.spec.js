@@ -1,5 +1,5 @@
 'use strict';
-describe('MFDalIndexedDB', function() {
+xdescribe('MFDalIndexedDB', function() {
   var dbName = 'MFDalIndexedDB' ;
   var $q, $rootScope, $httpBackend;
     

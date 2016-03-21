@@ -179,7 +179,7 @@ describe('DAO-cascades-daotest.update.1--1.spec.js', function () {
     });
   });
 
-  it('should update A only (Relation: A 1--1 B, Main: A). Cascade A.b on GET only', function (done) {
+  xit('should update A only (Relation: A 1--1 B, Main: A). Cascade A.b on GET only', function (done) {
     inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceCascade) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
@@ -209,6 +209,43 @@ describe('DAO-cascades-daotest.update.1--1.spec.js', function () {
         });
       });
       
+      // Resolve promises and http requests 
+      $rootScope.$apply();
+    });
+  });
+
+  it('should update A&B&C (Relation: A 1--1 B, B 1--1 C, Main: A). Cascade: A.b, B.c', function (done) {
+     inject(function (MFContextFactory, AgenceDaoNoSql, AgenceDetailDaoNoSql, AgenceCascade, AgenceDetailCascade, MFDalNoSqlProxy) {
+      tx = MFDalNoSqlProxy.openTransaction();
+      var context = MFContextFactory.createInstance();
+      context.dbTransaction = tx;
+
+      var oldValue = AgenceDaoNoSql.cascadeDefinition.detail.composite;
+      AgenceDaoNoSql.cascadeDefinition.detail.composite = false;
+
+      AgenceDetailDaoNoSql._getRecordById(3, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE]).then(function (entity) {
+        entity.notation = 666;
+        entity.agence.nom = 'Nom3Modified';
+        entity.agence.employees[0].firstName = 'Firstname3Modified';
+        
+        AgenceDetailDaoNoSql._updateRecord(entity, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE], false, []).then(function(updatedEntity) {
+          AgenceDetailDaoNoSql._getRecordById(3, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE]).then(function (entity) {
+            expect(entity).not.toBeNull();
+            
+            if (entity) { // 
+              expect(entity.notation).toEqual(666);
+              expect(entity.agence).not.toBeNull();
+              expect(entity.agence.nom).toEqual('Nom3Modified');
+              expect(entity.agence.employees).not.toBeNull();
+              expect(entity.agence.employees.length).toEqual(1); 
+              expect(entity.agence.employees[0].firstName).toEqual('Firstname3Modified');
+            }
+             
+            AgenceDaoNoSql.cascadeDefinition.detail.composite = oldValue;
+            done();
+          });
+        });
+      });
       // Resolve promises and http requests 
       $rootScope.$apply();
     });

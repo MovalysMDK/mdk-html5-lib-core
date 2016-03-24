@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('DAO-cascades-daotest.read.1--N.spec.js', function () {
+describe('DAO-cascades-daotest.read.1--N.spec.js', function () {
   var dbName = 'DAO-cascades-daotest';
   var $q, $rootScope, $httpBackend;
   var tx;
@@ -29,7 +29,7 @@ xdescribe('DAO-cascades-daotest.read.1--N.spec.js', function () {
       MFConfigurationService.setValue('dalPlatformType', 'browser');
       MFConfigurationService.setValue('dalDatabaseType', 'NoSql');
       // Set log level
-      console.setLogLevel('VERBOSE');
+      console.setLogLevel('WARN');
         
       // Block calls to MFInitScheduler.notify
       spyOn(MFInitScheduler, 'notify');

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('DAO-cascades-daotest.read.N--1.spec.js', function () {
+describe('DAO-cascades-daotest.create.1--1.spec.js', function () {
   var dbName = 'DAO-cascades-daotest';
   var $q, $rootScope, $httpBackend;
   var tx;
@@ -113,43 +113,35 @@ describe('DAO-cascades-daotest.read.N--1.spec.js', function () {
   
   
   /***** Unit test *****/
-  // 1--N
-  it('should get B (Relation: A 1--N B, Main: B). No cascade requested', function (done) {
-     inject(function (MFContextFactory, EmployeeDaoNoSql, MFDalNoSqlProxy) {
+  
+  // 1<>--N (Composite)
+  it('should save A&B (Relation: A 1<>--1 B, Main: A). No cascade requested', function (done) {
+    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceFactory, AgenceDetailFactory, ClientFactory) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
-
-      EmployeeDaoNoSql._getRecordById(3, context, []).then(function (entity) {
-        expect(entity).not.toBeNull();
-        if (entity) { // 
-          expect(entity.lastName).toEqual('Lastname3');
-          expect(entity.agence).toBeNull();
-        }
-
-        done();
-      });
       
-      // Resolve promises and http requests 
-      $rootScope.$apply();
-    });
-  });
-
-  it('should get A&B (Relation: A 1--N B, Main: B). Cascade: B.a', function (done) {
-     inject(function (MFContextFactory, EmployeeDaoNoSql, EmployeeCascade, MFDalNoSqlProxy) {
-      tx = MFDalNoSqlProxy.openTransaction();
-      var context = MFContextFactory.createInstance();
-      context.dbTransaction = tx;
-
-      EmployeeDaoNoSql._getRecordById(3, context, [EmployeeCascade.AGENCE]).then(function (entity) {
-        expect(entity).not.toBeNull();
-        if (entity) { // 
-          expect(entity.lastName).toEqual('Lastname3');
-          expect(entity.agence).not.toBeNull();
-          expect(entity.agence.nom).toEqual('Nom3');
-        }
+      AgenceDaoNoSql._getRecordById(-2, context, []).then(function (entity) {
+        expect(entity).toBeNull();
         
-        done();
+               // Create data
+        var agence = AgenceFactory.createInstance(); 
+        agence.nom = 'NewName';
+        agence.detail = AgenceDetailFactory.createInstance();
+        agence.detail.notation = 666;
+        
+        AgenceDaoNoSql._saveRecord(agence, context, [], false, []).then(function (savedEntity) {
+          AgenceDaoNoSql._getRecordById(-2, context, []).then(function (entity) {
+            expect(entity).not.toBeNull();
+            if (entity) { // 
+              expect(entity.nom).toEqual('NewName');
+              expect(entity.detail).not.toBeNull();
+              expect(entity.detail.notation).toEqual(666);
+            }
+     
+            done();
+          });
+        });
       });
       
       // Resolve promises and http requests 

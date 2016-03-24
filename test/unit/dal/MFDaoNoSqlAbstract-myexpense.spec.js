@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('MFDaoNoSqlAbstract-myexpense', function() {
+describe('MFDaoNoSqlAbstract-myexpense', function() {
   var dbName = 'MFDaoNoSqlAbstract-myexpense' ;
   var $q, $rootScope, $httpBackend;
   var tx;
@@ -123,7 +123,7 @@ xdescribe('MFDaoNoSqlAbstract-myexpense', function() {
         expect(entity).not.toBeNull();
         if (entity) { // 
           expect(entity.name).toEqual('Sed Dolor Fusce Associates');
-          expect(entity.reports.length).toEqual(0);
+          expect(entity.reports).toBeNull();
         }
         
         done();
@@ -147,7 +147,7 @@ xdescribe('MFDaoNoSqlAbstract-myexpense', function() {
           // First level: reports
           expect(entity.reports.length).toEqual(2);
           // Second level: expenses --> Should not be loaded
-          expect(entity.reports[0].expenses.length).toEqual(0);
+          expect(entity.reports[0].expenses).toBeNull();
         }
         
         done();
@@ -183,7 +183,6 @@ xdescribe('MFDaoNoSqlAbstract-myexpense', function() {
   afterEach(function(done) {
     inject(function(MFDalIndexedDB, MFDalIndexedDBTransaction) {
       waitUntil(function() {
-        console.error(MFDalIndexedDBTransaction.startedTransactions.length);
         return MFDalIndexedDBTransaction.startedTransactions.length === 0; 
       }, 500).then(
           function() {

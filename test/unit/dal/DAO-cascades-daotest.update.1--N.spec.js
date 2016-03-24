@@ -1,6 +1,6 @@
 'use strict';
 
-describe('DAO-cascades-daotest.update.1--1.spec.js', function () {
+describe('DAO-cascades-daotest.update.1--N.spec.js', function () {
   var dbName = 'DAO-cascades-daotest';
   var $q, $rootScope, $httpBackend;
   var tx;
@@ -113,103 +113,40 @@ describe('DAO-cascades-daotest.update.1--1.spec.js', function () {
   
   
   /***** Unit test *****/
-  
-  // 1<>--1 (Composite)
-  it('should update A&B (Relation: A 1<>-1 B, Main: A). No cascade requested', function (done) {
-    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy) {
+  it('should update A&B&C (Relation: A 1--1 B, B 1--N C, Main: A). Cascade: A.b, B.c', function (done) {
+     inject(function (MFContextFactory, AgenceDaoNoSql, AgenceDetailDaoNoSql, AgenceCascade, AgenceDetailCascade, MFDalNoSqlProxy) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
 
-      AgenceDaoNoSql._getRecordById(1, context, []).then(function (entity) {
-        entity.nom = 'Nom1Modified';
-        entity.detail.notation=666;
-
-        AgenceDaoNoSql._updateRecord(entity, context, [], false, []).then(function(updatedEntity) {
-          AgenceDaoNoSql._getRecordById(1, context, []).then(function (entity) {
-            expect(entity).not.toBeNull();
-            if (entity) { // 
-              expect(entity.nom).toEqual('Nom1Modified');
-              expect(entity.detail).not.toBeNull();
-              expect(entity.detail.notation).toEqual(666);
-            }
-
-            done();
-          });
-        });
-      });
-      
-      // Resolve promises and http requests 
-      $rootScope.$apply();
-    });
-  });
-
-  it('should update A&B (Relation: A 1--1 B, Main: A). Cascade A.b', function (done) {
-    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceCascade) {
-      tx = MFDalNoSqlProxy.openTransaction();
-      var context = MFContextFactory.createInstance();
-      context.dbTransaction = tx;
-
-      // Force the composite:false for the test
       AgenceDaoNoSql.cascadeDefinition.detail.composite = false;
 
-      AgenceDaoNoSql._getRecordById(2, context, [AgenceCascade.DETAIL]).then(function (entity) {
-        entity.nom = 'Nom2Modified';
-        entity.detail.notation=6662;
-
-        AgenceDaoNoSql._updateRecord(entity, context, [AgenceCascade.DETAIL], false, []).then(function(updatedEntity) {
-          AgenceDaoNoSql._getRecordById(2, context, [AgenceCascade.DETAIL]).then(function (entity) {
+      AgenceDetailDaoNoSql._getRecordById(3, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE]).then(function (entity) {
+        entity.notation = 666;
+        entity.agence.nom = 'Nom3Modified';
+        entity.agence.employees[0].firstName = 'Firstname3Modified';
+        
+        AgenceDetailDaoNoSql._updateRecord(entity, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE], false, []).then(function(updatedEntity) {
+          AgenceDetailDaoNoSql._getRecordById(3, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE]).then(function (entity) {
             expect(entity).not.toBeNull();
+            
             if (entity) { // 
-              expect(entity.nom).toEqual('Nom2Modified');
-              expect(entity.detail).not.toBeNull();
-              expect(entity.detail.notation).toEqual(6662);
+              expect(entity.notation).toEqual(666);
+              expect(entity.agence).not.toBeNull();
+              expect(entity.agence.nom).toEqual('Nom3Modified');
+              expect(entity.agence.employees).not.toBeNull();
+              expect(entity.agence.employees.length).toEqual(1); 
+              expect(entity.agence.employees[0].firstName).toEqual('Firstname3Modified');
             }
-      
+             
             done();
           });
         });
       });
-      
       // Resolve promises and http requests 
       $rootScope.$apply();
     });
   });
-
-  it('should update A only (Relation: A 1--1 B, Main: A). Cascade A.b on GET only', function (done) {
-    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceCascade) {
-      tx = MFDalNoSqlProxy.openTransaction();
-      var context = MFContextFactory.createInstance();
-      context.dbTransaction = tx;
-
-      // Force the composite:false for the test
-      AgenceDaoNoSql.cascadeDefinition.detail.composite = false;
-      
-      AgenceDaoNoSql._getRecordById(2, context, [AgenceCascade.DETAIL]).then(function (entity) {
-        entity.nom = 'Nom2Modified';
-        entity.detail.notation=6662;
-
-        AgenceDaoNoSql._updateRecord(entity, context, [], false, []).then(function(updatedEntity) {
-          AgenceDaoNoSql._getRecordById(2, context, [AgenceCascade.DETAIL]).then(function (entity) {
-            expect(entity).not.toBeNull();
-            if (entity) { // 
-              expect(entity.nom).toEqual('Nom2Modified');
-              expect(entity.detail).not.toBeNull();
-              expect(entity.detail.notation).toEqual(2);
-            }
-
-      
-            done();
-          });
-        });
-      });
-      
-      // Resolve promises and http requests 
-      $rootScope.$apply();
-    });
-  });
-
-
 
   afterEach(function (done) {
     inject(function (MFDalIndexedDB, MFDalIndexedDBTransaction) {

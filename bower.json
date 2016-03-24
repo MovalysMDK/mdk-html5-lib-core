@@ -84,6 +84,7 @@
     "lib/init/manager/MFInitStatus.js",
     "lib/init/manager/MFInitTaskStatus.js",
     "lib/utils/MFConfigurationService.js",
+    "lib/utils/MFConsoleOverloads.js",
     "lib/utils/MFCordova.js",
     "lib/utils/MFCordovaFile.js",
     "lib/utils/MFCordovaStatusEnum.js",

@@ -145,7 +145,7 @@ describe('DAO-cascades-daotest.delete.1--1.spec.js', function () {
     });
   });
   
-    // 1<>--1 (Composite)
+    // 1--1
   it('should delete  A&B (Relation: A 1--1 B, Main: A). Cascade A.b', function (done) {
     inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceDetailDaoNoSql, AgenceCascade) {
       tx = MFDalNoSqlProxy.openTransaction();

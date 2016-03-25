@@ -1,6 +1,6 @@
 'use strict';
 
-describe('DAO-cascades-daotest.delete.1--1.spec.js', function () {
+describe('DAO-cascades-daotest.delete.1--N.spec.js', function () {
   var dbName = 'DAO-cascades-daotest';
   var $q, $rootScope, $httpBackend;
   var tx;
@@ -113,26 +113,28 @@ describe('DAO-cascades-daotest.delete.1--1.spec.js', function () {
   
   
   /***** Unit test *****/
-  // 1<>--1 (Composite)
-  it('should delete  A&B (Relation: A 1<>--1 B, Main: A). No cascade requested', function (done) {
-    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceDetailDaoNoSql) {
+  // 1<>--N (Composite)
+  it('should delete  A&B (Relation: A 1<>--N B, Main: A). No cascade requested', function (done) {
+    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceDetailDaoNoSql, ClientDaoNoSql) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
+      
+      AgenceDaoNoSql.cascadeDefinition.clients.composite = true;
       
       AgenceDaoNoSql._getRecordById(2, context, []).then(function (entity) {
         expect(entity).not.toBeNull();
         
         if (entity) { // 
           expect(entity.nom).toEqual('Nom2');
-          expect(entity.detail).not.toBeNull();
-          expect(entity.detail.notation).toEqual(2);
+          expect(entity.clients).not.toBeNull();
+          expect(entity.clients.length).toEqual(1);
         }
     
         AgenceDaoNoSql._deleteRecordById(2, context, [], false).then(function() {
          AgenceDaoNoSql._getRecordById(2, context, []).then(function (entity) {
             expect(entity).toBeNull();
-            AgenceDetailDaoNoSql._getRecordById(2, context, []).then(function (entity) {
+             ClientDaoNoSql._getRecordById(2, context, []).then(function (entity) {
               expect(entity).toBeNull();
               done();
             });
@@ -145,29 +147,26 @@ describe('DAO-cascades-daotest.delete.1--1.spec.js', function () {
     });
   });
   
-    // 1<>--1 (Composite)
-  it('should delete  A&B (Relation: A 1--1 B, Main: A). Cascade A.b', function (done) {
-    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceDetailDaoNoSql, AgenceCascade) {
+    // 1--N
+  it('should delete  A&B (Relation: A 1--N B, Main: A). Cascade', function (done) {
+    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceDetailDaoNoSql, ClientDaoNoSql, AgenceCascade) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
-      
-      // Force the composite:false for the test
-      AgenceDaoNoSql.cascadeDefinition.detail.composite = false;
-      
-      AgenceDaoNoSql._getRecordById(2, context, [AgenceCascade.DETAIL]).then(function (entity) {
+            
+      AgenceDaoNoSql._getRecordById(2, context, [AgenceCascade.CLIENTS]).then(function (entity) {
         expect(entity).not.toBeNull();
         
         if (entity) { // 
           expect(entity.nom).toEqual('Nom2');
-          expect(entity.detail).not.toBeNull();
-          expect(entity.detail.notation).toEqual(2);
+          expect(entity.clients).not.toBeNull();
+          expect(entity.clients.length).toEqual(1);
         }
     
-        AgenceDaoNoSql._deleteRecordById(2, context, [AgenceCascade.DETAIL], false).then(function() {
+        AgenceDaoNoSql._deleteRecordById(2, context, [AgenceCascade.CLIENTS], false).then(function() {
          AgenceDaoNoSql._getRecordById(2, context, []).then(function (entity) {
             expect(entity).toBeNull();
-            AgenceDetailDaoNoSql._getRecordById(2, context, []).then(function (entity) {
+             ClientDaoNoSql._getRecordById(2, context, []).then(function (entity) {
               expect(entity).toBeNull();
               done();
             });

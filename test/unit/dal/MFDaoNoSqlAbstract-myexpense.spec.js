@@ -29,7 +29,7 @@ describe('MFDaoNoSqlAbstract-myexpense', function() {
         MFConfigurationService.setValue('dalPlatformType','browser');
         MFConfigurationService.setValue('dalDatabaseType', 'NoSql');
         // Set log level
-        console.setLogLevel('VERBOSE');
+        console.setLogLevel('WARN');
         
         // Block calls to MFInitScheduler.notify
         spyOn(MFInitScheduler, 'notify');

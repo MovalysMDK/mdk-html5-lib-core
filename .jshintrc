@@ -17,6 +17,7 @@
     "undef": true,
     "unused":"vars",
     "strict": true,
+    "latedef": false,
 
 
     "eqnull":true,

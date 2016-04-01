@@ -15,20 +15,29 @@ describe('MFDalWebSQL', function () {
         'T_EMPLSKILL'];
     var $dataSQL;
 
-
     /** Prepare database : Delete it **/
     beforeAll(function (done) {
-        var request = openDatabase('testdao', '1', 'testdao database', 5000000);
+        var number = 0;
+        var request = openDatabase(dbName, '1', dbName + ' database', 5000000);
         if (request) {
             for (var i = 0, length = table.length; i < length; i += 1) {
                 request.transaction(function (tx) {
-                    tx.executeSql('DROP TABLE ' + table[i]);
+                    tx.executeSql('DROP TABLE IF EXISTS ' + table[i], [], function () {
+                        number += 1;
+                    }, function () {
+                        number += 1;
+                        fail('unable to drop Table ');
+                    });
                 });
             }
-            done();
-        } else {
-            fail(event.target.webkitErrorMessage || event.target.errorCode);
 
+            waitUntil(function () {
+                return number === length;
+            }).then(function () {
+                done();
+            });
+        } else {
+            fail('Unable to open DB');
         }
     });
 
@@ -37,11 +46,11 @@ describe('MFDalWebSQL', function () {
     beforeEach(function () {
         module('data-daotest-sql');
 
-        inject(function (_$q_, _$rootScope_, _$httpBackend_,dataSQL) {
+        inject(function (_$q_, _$rootScope_, _$httpBackend_, _dataSQL_) {
             $q = _$q_;
             $rootScope = _$rootScope_;
             $httpBackend = _$httpBackend_;
-            $dataSQL = dataSQL;
+            $dataSQL = _dataSQL_;
         });
     });
 
@@ -77,85 +86,103 @@ describe('MFDalWebSQL', function () {
     /**** Prepare HTTP Responses *****/
     beforeEach(function () {
         //jasmine.getJSONFixtures().fixturesPath = 'base/test/unit/data/sql/daotest';
-        $httpBackend.whenGET('base/test/unit/data/sql/daotest/daotest-data-model.sql').respond($dataSQL.daotestData);
-        $httpBackend.whenGET('assets/data/sql/create_userdata.sql').respond($dataSQL.daotestDataModel);
+        $httpBackend.whenGET('assets/data/sql/create_usermodel.sql').respond($dataSQL.daotestDataModel);
+        $httpBackend.whenGET('assets/data/sql/create_userdata.sql').respond($dataSQL.daotestData);
     });
 
     /***** Unit test *****/
     it('should create stores from files', function (done) {
-        inject(function (MFDalWebSql, MFSystem) {
+        inject(function (MFDalWebSql, CreateUserTable, MFContextFactory) {
+            var context = MFContextFactory.createInstance();
             // Expect a GET call
-            $httpBackend.expectGET('base/test/unit/data/sql/daotest/daotest-data-model.sql');
-
-            // Load data and create DB
-            MFSystem.getAssets(['base/test/unit/data/sql/daotest/daotest-data-model.sql'], false).then(
-                function (createStoresScripts) {
-                    MFDalWebSql.openDatabase(createStoresScripts).then(
-                        function (db) {
-                            // Open the DB
-                            var transaction = db.transaction(['Expense', 'Customer', 'Report', 'ExpenseType']);
-                            expect(transaction.objectStore('Expense')).not.toBeNull();
-                            expect(transaction.objectStore('Customer')).not.toBeNull();
-                            expect(transaction.objectStore('Report')).not.toBeNull();
-                            expect(transaction.objectStore('ExpenseType')).not.toBeNull();
-                            expect(function () {
-                                transaction.objectStore('Dummy')
-                            }).toThrow();
-                            done();
-                        });
+            MFDalWebSql.openDatabase(true).then(function (db) {
+                CreateUserTable.createTable(context, true, function (ok) {
+                    if (ok) {
+                        testCreateUserTable(db, done);
+                    } else {
+                        fail('create user table fail');
+                    }
                 });
+                $httpBackend.flush();
+                $rootScope.$apply();
+
+            });
+            // Load data and create DB
 
             // Resolve promises and http requests
-            $httpBackend.flush();
-            $rootScope.$apply();
         });
     });
-
     it('should add data in the stores', function (done) {
-        inject(function (MFInitFillInUserTables, MFContextFactory, MFDalIndexedDB, MFInitTaskStatus) {
+        inject(function (MFInitFillInUserTables, MFContextFactory, MFDalWebSql, FillUserTable) {
             var context = MFContextFactory.createInstance();
 
-            MFDalIndexedDB.openDatabase().then(
+            MFDalWebSql.openDatabase(false).then(
                 function (db) {
-                    MFInitFillInUserTables.runTaskNoSql(context, true);
+                    FillUserTable.fillTable(context, true, function (ok) {
+                        if (ok) {
+                            testFillUserTable(db, done);
+                        } else {
+                            fail('fill user table fail');
+                            done();
+                        }
 
-                    // Resolve promises and http requests
-                    $rootScope.$apply();
-                    $httpBackend.flush();
-
-                    var transaction = db.transaction(['Expense', 'Customer', 'Report', 'ExpenseType']);
-                    var expenseCountRequest = transaction.objectStore('Expense').count();
-                    var customerCountRequest = transaction.objectStore('Customer').count();
-                    var reportCountRequest = transaction.objectStore('Report').count();
-                    var expenseTypeCountRequest = transaction.objectStore('ExpenseType').count();
-                    var checksDone = 0;
-
-                    expenseCountRequest.onsuccess = function () {
-                        expect(expenseCountRequest.result).toEqual(5);
-                        checksDone++;
-                        console.log()
-                    }
-                    customerCountRequest.onsuccess = function () {
-                        expect(customerCountRequest.result).toEqual(5);
-                        checksDone++;
-                    }
-                    reportCountRequest.onsuccess = function () {
-                        expect(reportCountRequest.result).toEqual(9);
-                        checksDone++;
-                    }
-                    expenseTypeCountRequest.onsuccess = function () {
-                        expect(expenseTypeCountRequest.result).toEqual(7);
-                        checksDone++;
-                    }
-
-                    // Wait for checks to be done
-                    waitUntil(function () {
-                        return checksDone === 4;
-                    }).then(function () {
-                        done();
                     });
+                    $httpBackend.flush();
+                    $rootScope.$apply();
                 }
             );
         });
     });
+
+    function testCreateUserTable(db, done) {
+        var test = true
+        var number = 0;
+        var length = table.length;
+        db.transaction(function (tx) {
+            for (var i = 0; i < length; i += 1) {
+                tx.executeSql('SELECT * FROM ' + table[i], [], function () {
+                    number += 1;
+                }, function () {
+                    number += 1;
+                    test = false;
+                });
+            }
+        });
+
+        waitUntil(function () {
+            return number === length;
+        }).then(function () {
+            expect(test).toBe(true);
+            done();
+        });
+
+    }
+
+    function testFillUserTable(db, done) {
+        var test = true
+        var number = 0;
+        var length = table.length;
+        db.transaction(function (tx) {
+            for (var i = 0; i < length; i += 1) {
+                tx.executeSql('SELECT * FROM ' + table[i], [], function (t, data) {
+                    number += 1;
+                    if (data.rows.length !== 17) {
+                        test = false;
+                    }
+                }, function () {
+                    number += 1;
+                    test = false;
+                });
+            }
+        });
+
+        waitUntil(function () {
+            return number === length;
+        }).then(function () {
+            expect(test).toBe(true);
+            done();
+        });
+
+    }
+
 });

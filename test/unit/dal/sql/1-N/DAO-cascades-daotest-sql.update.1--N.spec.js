@@ -4,6 +4,7 @@ describe('DAO-cascades-daotest-sql.update.1--N.spec.js', function () {
     var dbName = 'UpdateCascade-1-N';
     var $TestService;
     var $rootScope;
+    var flag = false;
     /* Inject angular dependencies */
     /* Set MFCore configuration */
     /* Prepare HTTP Responses */
@@ -32,11 +33,10 @@ describe('DAO-cascades-daotest-sql.update.1--N.spec.js', function () {
                     entity.notation = 666;
                     entity.agence.nom = 'Nom3Modified';
                     entity.agence.employees[0].firstName = 'Firstname3Modified';
-
                     AgenceDetailDaoSql.updateAgenceDetail(entity, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE], false, []).then(function (updatedEntity) {
                         AgenceDetailDaoSql.getAgenceDetailById(3, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE]).then(function (entity) {
                             expect(entity).not.toBeNull();
-                            if (entity) { //
+                            if (entity) {
                                 expect(entity.notation).toEqual(666);
                                 expect(entity.agence).not.toBeNull();
                                 expect(entity.agence.nom).toEqual('Nom3Modified');
@@ -46,9 +46,10 @@ describe('DAO-cascades-daotest-sql.update.1--N.spec.js', function () {
                             }
                             done();
                         });
+                        $rootScope.$apply();
                     });
+                    $rootScope.$apply();
                 });
-                $rootScope.$apply();
             });
         });
     });

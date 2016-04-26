@@ -267,17 +267,17 @@ deferred.reject(returnedError_executeQueryToRead);
 						// 		3.1  call saveOrUpdate function of the child dao
 						// 		3.2  check that the ID attribute of the children model entities is updated (update foreign key of the parent pointing the child just saved)
 
-						var agence4Idx = p_cascadeSet.indexOf('agence4');
-						if( agence4Idx > -1) {
-							p_cascadeSet.splice(agence4Idx, 1);
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'AGENCE4') {
 							saveOtherChildren.push( AgenceDaoProxy.saveOrUpdateListAgence(p_entity.agence4, p_context, p_cascadeSet, p_toSync) );
-						}
+continue ;}
 
-						var agence1Idx = p_cascadeSet.indexOf('agence1');
-						if( agence1Idx > -1) {
-							p_cascadeSet.splice(agence1Idx, 1);
+if( p_cascadeSet[i].key === 'AGENCE1') {
 							saveOtherChildren.push( AgenceDaoProxy.saveOrUpdateListAgence(p_entity.agence1, p_context, p_cascadeSet, p_toSync) );
-						}
+continue ;}
+		}
+		}
 
 
 						$qSync.all(saveOtherChildren).then(
@@ -387,10 +387,10 @@ deferred.reject(returnedError_executeQueryToRead);
 
 		self.fixDoubleWaysRelationship(p_entity);
 		// for composition relationships one_to_xxx
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
 
-		var agence4Idx = p_cascadeSet.indexOf('agence4');
-		if( agence4Idx > -1) {
-			p_cascadeSet.splice(agence4Idx, 1);
+if( p_cascadeSet[i].key === 'AGENCE4') {
 
 			// 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
 			childrenPromises.push(
@@ -407,11 +407,9 @@ deferred.reject(returnedError_executeQueryToRead);
 
 			// 2. save or update the remaining children if composition relationship one_to_xxx
 			childrenPromises.push( AgenceDaoProxy.saveOrUpdateListAgence(p_entity.agence4, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
-		}
+continue ;		}
 
-		var agence1Idx = p_cascadeSet.indexOf('agence1');
-		if( agence1Idx > -1) {
-			p_cascadeSet.splice(agence1Idx, 1);
+if( p_cascadeSet[i].key === 'AGENCE1') {
 
 			// 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
 			childrenPromises.push(
@@ -428,6 +426,8 @@ deferred.reject(returnedError_executeQueryToRead);
 
 			// 2. save or update the remaining children if composition relationship one_to_xxx
 			childrenPromises.push( AgenceDaoProxy.saveOrUpdateListAgence(p_entity.agence1, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
+continue ;		}
+		}
 		}
 
 

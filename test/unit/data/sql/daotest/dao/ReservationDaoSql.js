@@ -598,15 +598,15 @@ deferred.reject(returnedError_executeQueryToRead);
 
 		//		1.1  call saveOrUpdate function of the child dao
 		//		1.2  check that the ID attribute of the children model entities is updated (update foreign key of the parent pointing the child just saved)
-		var resourceIdx = p_cascadeSet.indexOf('resource');
-		if( resourceIdx > -1) {
-			p_cascadeSet.splice(resourceIdx, 1);
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'RESOURCE') {
 			savePointedChildren.push( ResourceDaoProxy.saveOrUpdateResource(p_entity.resource, p_context, p_cascadeSet, p_toSync) );
-		}
-		var employeIdx = p_cascadeSet.indexOf('employe');
-		if( employeIdx > -1) {
-			p_cascadeSet.splice(employeIdx, 1);
+continue ;		}
+if( p_cascadeSet[i].key === 'EMPLOYE') {
 			savePointedChildren.push( EmployeeDaoProxy.saveOrUpdateEmployee(p_entity.employe, p_context, p_cascadeSet, p_toSync) );
+continue ;		}
+		}
 		}
 
 		$qSync.all(savePointedChildren).then(
@@ -730,13 +730,15 @@ deferred.reject(returnedError_executeQueryToRead);
 
 
 		// 2. save or update all the other children (no matter the type of relationship), if asked by p_cascadeset
-		var resourceIdx = p_cascadeSet.indexOf('resource');
-		if( resourceIdx > -1) {
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'RESOURCE') {
 			childrenPromises.push( ResourceDaoProxy.saveOrUpdateResource(p_entity.resource, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
-		}
-		var employeIdx = p_cascadeSet.indexOf('employe');
-		if( employeIdx > -1) {
+continue ;		}
+if( p_cascadeSet[i].key === 'EMPLOYE') {
 			childrenPromises.push( EmployeeDaoProxy.saveOrUpdateEmployee(p_entity.employe, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
+continue ;		}
+		}
 		}
 
 
@@ -967,19 +969,17 @@ deferred.reject(returnedError_executeQueryToRead);
 								pointersDeletes = [];
 
 								//5. for composition and aggregation relationships xxx_to_one
-								var resourceIdx = p_cascadeSet.indexOf('resource');
-								// 	5.1. ONLY IF asked in p_cascadeset, delete children
-								if( resourceIdx > -1) {
-									p_cascadeSet.splice(resourceIdx, 1);
-									pointersDeletes.push( ResourceDaoProxy.deleteListResource(p_entity.resource, p_context, p_cascadeSet, p_toSync) );
-								}
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'RESOURCE') {
+									pointersDeletes.push( ResourceDaoProxy.deleteResource(p_entity.resource, p_context, p_cascadeSet, p_toSync) );
+continue ;								}
 
-								var employeIdx = p_cascadeSet.indexOf('employe');
-								// 	5.1. ONLY IF asked in p_cascadeset, delete children
-								if( employeIdx > -1) {
-									p_cascadeSet.splice(employeIdx, 1);
-									pointersDeletes.push( EmployeeDaoProxy.deleteListEmployee(p_entity.employe, p_context, p_cascadeSet, p_toSync) );
-								}
+if( p_cascadeSet[i].key === 'EMPLOYE') {
+									pointersDeletes.push( EmployeeDaoProxy.deleteEmployee(p_entity.employe, p_context, p_cascadeSet, p_toSync) );
+continue ;								}
+		}
+		}
 
 								$qSync.all(pointersDeletes).then(
 									function(returnedSuccess_executeQuery2ToDelete) { /* SUCCESS */

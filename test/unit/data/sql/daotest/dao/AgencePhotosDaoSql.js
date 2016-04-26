@@ -420,10 +420,12 @@ deferred.reject(returnedError_executeQueryToRead);
 
 		//		1.1  call saveOrUpdate function of the child dao
 		//		1.2  check that the ID attribute of the children model entities is updated (update foreign key of the parent pointing the child just saved)
-		var photosAgenceIdx = p_cascadeSet.indexOf('photosAgence');
-		if( photosAgenceIdx > -1) {
-			p_cascadeSet.splice(photosAgenceIdx, 1);
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'PHOTOSAGENCE') {
 			savePointedChildren.push( AgenceDaoProxy.saveOrUpdateAgence(p_entity.photosAgence, p_context, p_cascadeSet, p_toSync) );
+		}
+		}
 		}
 
 		$qSync.all(savePointedChildren).then(
@@ -547,9 +549,12 @@ deferred.reject(returnedError_executeQueryToRead);
 
 
 		// 2. save or update all the other children (no matter the type of relationship), if asked by p_cascadeset
-		var photosAgenceIdx = p_cascadeSet.indexOf('photosAgence');
-		if( photosAgenceIdx > -1) {
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'PHOTOSAGENCE') {
 			childrenPromises.push( AgenceDaoProxy.saveOrUpdateAgence(p_entity.photosAgence, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
+		}
+		}
 		}
 
 
@@ -780,12 +785,13 @@ deferred.reject(returnedError_executeQueryToRead);
 								pointersDeletes = [];
 
 								//5. for composition and aggregation relationships xxx_to_one
-								var photosAgenceIdx = p_cascadeSet.indexOf('photosAgence');
-								// 	5.1. ONLY IF asked in p_cascadeset, delete children
-								if( photosAgenceIdx > -1) {
-									p_cascadeSet.splice(photosAgenceIdx, 1);
-									pointersDeletes.push( AgenceDaoProxy.deleteListAgence(p_entity.photosAgence, p_context, p_cascadeSet, p_toSync) );
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'PHOTOSAGENCE') {
+									pointersDeletes.push( AgenceDaoProxy.deleteAgence(p_entity.photosAgence, p_context, p_cascadeSet, p_toSync) );
 								}
+		}
+		}
 
 								$qSync.all(pointersDeletes).then(
 									function(returnedSuccess_executeQuery2ToDelete) { /* SUCCESS */

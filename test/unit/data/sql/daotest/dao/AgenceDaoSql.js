@@ -1868,35 +1868,35 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
 
                 //		1.1  call saveOrUpdate function of the child dao
                 //		1.2  check that the ID attribute of the children model entities is updated (update foreign key of the parent pointing the child just saved)
-                var activite4Idx = p_cascadeSet.indexOf('activite4');
-                if (activite4Idx > -1) {
-                    p_cascadeSet.splice(activite4Idx, 1);
-                    savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite4, p_context, p_cascadeSet, p_toSync));
-                }
-                var detailIdx = p_cascadeSet.indexOf('detail');
-                if (detailIdx > -1) {
-                    p_cascadeSet.splice(detailIdx, 1);
-                    savePointedChildren.push(AgenceDetailDaoProxy.saveOrUpdateAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
-                }
-                var activite3Idx = p_cascadeSet.indexOf('activite3');
-                if (activite3Idx > -1) {
-                    p_cascadeSet.splice(activite3Idx, 1);
-                    savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite3, p_context, p_cascadeSet, p_toSync));
-                }
-                var activite2Idx = p_cascadeSet.indexOf('activite2');
-                if (activite2Idx > -1) {
-                    p_cascadeSet.splice(activite2Idx, 1);
-                    savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite2, p_context, p_cascadeSet, p_toSync));
-                }
-                var activite1Idx = p_cascadeSet.indexOf('activite1');
-                if (activite1Idx > -1) {
-                    p_cascadeSet.splice(activite1Idx, 1);
-                    savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite1, p_context, p_cascadeSet, p_toSync));
-                }
-                var mainClientIdx = p_cascadeSet.indexOf('mainClient');
-                if (mainClientIdx > -1) {
-                    p_cascadeSet.splice(mainClientIdx, 1);
-                    savePointedChildren.push(ClientDaoProxy.saveOrUpdateClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync));
+                /*jshint loopfunc: true */
+                /* jshint shadow:true */
+                for (var i = 0, cascadeSetLength = p_cascadeSet.length; i < cascadeSetLength; i += 1) {
+                    if (p_cascadeSet[i].entityName === p_entity._type) {
+                        if (p_cascadeSet[i].key === 'ACTIVITE4') {
+                            savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite4, p_context, p_cascadeSet, p_toSync));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'DETAIL') {
+                            savePointedChildren.push(AgenceDetailDaoProxy.saveOrUpdateAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'ACTIVITE3') {
+                            savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite3, p_context, p_cascadeSet, p_toSync));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'ACTIVITE2') {
+                            savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite2, p_context, p_cascadeSet, p_toSync));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'ACTIVITE1') {
+                            savePointedChildren.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite1, p_context, p_cascadeSet, p_toSync));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'MAINCLIENT') {
+                            savePointedChildren.push(ClientDaoProxy.saveOrUpdateClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync));
+                            continue;
+                        }
+                    }
                 }
 
                 $qSync.all(savePointedChildren).then(
@@ -1917,34 +1917,35 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
                                 // 		3.1  call saveOrUpdate function of the child dao
                                 // 		3.2  check that the ID attribute of the children model entities is updated (update foreign key of the parent pointing the child just saved)
 
-                                var clientsIdx = p_cascadeSet.indexOf('clients');
-                                if (clientsIdx > -1) {
-                                    p_cascadeSet.splice(clientsIdx, 1);
-                                    saveOtherChildren.push(ClientDaoProxy.saveOrUpdateListClient(p_entity.clients, p_context, p_cascadeSet, p_toSync));
-                                }
+                                /*jshint loopfunc: true */
+                                /* jshint shadow:true */
+                                for (var i = 0, cascadeSetLength = p_cascadeSet.length; i < cascadeSetLength; i += 1) {
+                                    if (p_cascadeSet[i].entityName === p_entity._type) {
+                                        if (p_cascadeSet[i].key === 'CLIENTS') {
+                                            saveOtherChildren.push(ClientDaoProxy.saveOrUpdateListClient(p_entity.clients, p_context, p_cascadeSet, p_toSync));
+                                            continue;
+                                        }
 
-                                var detailIdx = p_cascadeSet.indexOf('detail');
-                                if (detailIdx > -1) {
-                                    p_cascadeSet.splice(detailIdx, 1);
-                                    saveOtherChildren.push(AgenceDetailDaoProxy.saveOrUpdateAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
-                                }
+                                        if (p_cascadeSet[i].key === 'DETAIL') {
+                                            saveOtherChildren.push(AgenceDetailDaoProxy.saveOrUpdateAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
+                                            continue;
+                                        }
 
-                                var employeesIdx = p_cascadeSet.indexOf('employees');
-                                if (employeesIdx > -1) {
-                                    p_cascadeSet.splice(employeesIdx, 1);
-                                    saveOtherChildren.push(EmployeeDaoProxy.saveOrUpdateListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync));
-                                }
+                                        if (p_cascadeSet[i].key === 'EMPLOYEES') {
+                                            saveOtherChildren.push(EmployeeDaoProxy.saveOrUpdateListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync));
+                                            continue;
+                                        }
 
-                                var mainClientIdx = p_cascadeSet.indexOf('mainClient');
-                                if (mainClientIdx > -1) {
-                                    p_cascadeSet.splice(mainClientIdx, 1);
-                                    saveOtherChildren.push(ClientDaoProxy.saveOrUpdateClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync));
-                                }
+                                        if (p_cascadeSet[i].key === 'MAINCLIENT') {
+                                            saveOtherChildren.push(ClientDaoProxy.saveOrUpdateClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync));
+                                            continue;
+                                        }
 
-                                var photosIdx = p_cascadeSet.indexOf('photos');
-                                if (photosIdx > -1) {
-                                    p_cascadeSet.splice(photosIdx, 1);
-                                    saveOtherChildren.push(AgencePhotosDaoProxy.saveOrUpdateListAgencePhotos(p_entity.photos, p_context, p_cascadeSet, p_toSync));
+                                        if (p_cascadeSet[i].key === 'PHOTOS') {
+                                            saveOtherChildren.push(AgencePhotosDaoProxy.saveOrUpdateListAgencePhotos(p_entity.photos, p_context, p_cascadeSet, p_toSync));
+                                            continue;
+                                        }
+                                    }
                                 }
 
 
@@ -2054,129 +2055,136 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
 
                 self.fixDoubleWaysRelationship(p_entity);
                 // for composition relationships one_to_xxx
+                /*jshint loopfunc: true */
+                /* jshint shadow:true */
+                for (var i = 0, cascadeSetLength = p_cascadeSet.length; i < cascadeSetLength; i += 1) {
+                    if (p_cascadeSet[i].entityName === p_entity._type) {
 
-                var clientsIdx = p_cascadeSet.indexOf('clients');
-                if (clientsIdx > -1) {
-                    p_cascadeSet.splice(clientsIdx, 1);
+                        if (p_cascadeSet[i].key === 'CLIENTS') {
 
-                    // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
-                    childrenPromises.push(
-                        self.getChildrenIdsToRemove(p_context, p_entity, 'clients').then(
-                            function (idsToRemove) {
-                                console.log('children to remove found', idsToRemove);
-                                return ClientDaoProxy.deleteListClientByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
-                            },
-                            function (error) {
-                                deferred.reject(error);
-                            }
-                        )
-                    );
+                            // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
+                            childrenPromises.push(
+                                self.getChildrenIdsToRemove(p_context, p_entity, 'clients').then(
+                                    function (idsToRemove) {
+                                        console.log('children to remove found', idsToRemove);
+                                        return ClientDaoProxy.deleteListClientByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                    },
+                                    function (error) {
+                                        deferred.reject(error);
+                                    }
+                                )
+                            );
 
-                    // 2. save or update the remaining children if composition relationship one_to_xxx
-                    childrenPromises.push(ClientDaoProxy.saveOrUpdateListClient(p_entity.clients, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
+                            // 2. save or update the remaining children if composition relationship one_to_xxx
+                            childrenPromises.push(ClientDaoProxy.saveOrUpdateListClient(p_entity.clients, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
 
-                var detailIdx = p_cascadeSet.indexOf('detail');
-                if (detailIdx > -1) {
-                    p_cascadeSet.splice(detailIdx, 1);
+                        if (p_cascadeSet[i].key === 'DETAIL') {
 
-                    // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
-                    childrenPromises.push(
-                        self.getChildrenIdsToRemove(p_context, p_entity, 'detail').then(
-                            function (idsToRemove) {
-                                console.log('children to remove found', idsToRemove);
-                                return AgenceDetailDaoProxy.deleteListAgenceDetailByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
-                            },
-                            function (error) {
-                                deferred.reject(error);
-                            }
-                        )
-                    );
+                            // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
+                            childrenPromises.push(
+                                self.getChildrenIdsToRemove(p_context, p_entity, 'detail').then(
+                                    function (idsToRemove) {
+                                        console.log('children to remove found', idsToRemove);
+                                        return AgenceDetailDaoProxy.deleteAgenceDetailById(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                    },
+                                    function (error) {
+                                        deferred.reject(error);
+                                    }
+                                )
+                            );
 
-                    // 2. save or update the remaining children if composition relationship one_to_xxx
-                    childrenPromises.push(AgenceDetailDaoProxy.saveOrUpdateAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
+                            // 2. save or update the remaining children if composition relationship one_to_xxx
+                            childrenPromises.push(AgenceDetailDaoProxy.saveOrUpdateAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
 
-                var employeesIdx = p_cascadeSet.indexOf('employees');
-                if (employeesIdx > -1) {
-                    p_cascadeSet.splice(employeesIdx, 1);
+                        if (p_cascadeSet[i].key === 'EMPLOYEES') {
 
-                    // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
-                    childrenPromises.push(
-                        self.getChildrenIdsToRemove(p_context, p_entity, 'employees').then(
-                            function (idsToRemove) {
-                                console.log('children to remove found', idsToRemove);
-                                return EmployeeDaoProxy.deleteListEmployeeByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
-                            },
-                            function (error) {
-                                deferred.reject(error);
-                            }
-                        )
-                    );
+                            // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
+                            childrenPromises.push(
+                                self.getChildrenIdsToRemove(p_context, p_entity, 'employees').then(
+                                    function (idsToRemove) {
+                                        console.log('children to remove found', idsToRemove);
+                                        return EmployeeDaoProxy.deleteListEmployeeByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                    },
+                                    function (error) {
+                                        deferred.reject(error);
+                                    }
+                                )
+                            );
 
-                    // 2. save or update the remaining children if composition relationship one_to_xxx
-                    childrenPromises.push(EmployeeDaoProxy.saveOrUpdateListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
+                            // 2. save or update the remaining children if composition relationship one_to_xxx
+                            childrenPromises.push(EmployeeDaoProxy.saveOrUpdateListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
 
-                var mainClientIdx = p_cascadeSet.indexOf('mainClient');
-                if (mainClientIdx > -1) {
-                    p_cascadeSet.splice(mainClientIdx, 1);
+                        if (p_cascadeSet[i].key === 'MAINCLIENT') {
 
-                    // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
-                    childrenPromises.push(
-                        self.getChildrenIdsToRemove(p_context, p_entity, 'mainClient').then(
-                            function (idsToRemove) {
-                                console.log('children to remove found', idsToRemove);
-                                return ClientDaoProxy.deleteListClientByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
-                            },
-                            function (error) {
-                                deferred.reject(error);
-                            }
-                        )
-                    );
+                            // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
+                            childrenPromises.push(
+                                self.getChildrenIdsToRemove(p_context, p_entity, 'mainClient').then(
+                                    function (idsToRemove) {
+                                        console.log('children to remove found', idsToRemove);
+                                        return ClientDaoProxy.deleteClientById(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                    },
+                                    function (error) {
+                                        deferred.reject(error);
+                                    }
+                                )
+                            );
 
-                    // 2. save or update the remaining children if composition relationship one_to_xxx
-                    childrenPromises.push(ClientDaoProxy.saveOrUpdateClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
+                            // 2. save or update the remaining children if composition relationship one_to_xxx
+                            childrenPromises.push(ClientDaoProxy.saveOrUpdateClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
 
-                var photosIdx = p_cascadeSet.indexOf('photos');
-                if (photosIdx > -1) {
-                    p_cascadeSet.splice(photosIdx, 1);
+                        if (p_cascadeSet[i].key === 'PHOTOS') {
 
-                    // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
-                    childrenPromises.push(
-                        self.getChildrenIdsToRemove(p_context, p_entity, 'photos').then(
-                            function (idsToRemove) {
-                                console.log('children to remove found', idsToRemove);
-                                return AgencePhotosDaoProxy.deleteListAgencePhotosByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
-                            },
-                            function (error) {
-                                deferred.reject(error);
-                            }
-                        )
-                    );
+                            // 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
+                            childrenPromises.push(
+                                self.getChildrenIdsToRemove(p_context, p_entity, 'photos').then(
+                                    function (idsToRemove) {
+                                        console.log('children to remove found', idsToRemove);
+                                        return AgencePhotosDaoProxy.deleteListAgencePhotosByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                    },
+                                    function (error) {
+                                        deferred.reject(error);
+                                    }
+                                )
+                            );
 
-                    // 2. save or update the remaining children if composition relationship one_to_xxx
-                    childrenPromises.push(AgencePhotosDaoProxy.saveOrUpdateListAgencePhotos(p_entity.photos, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            // 2. save or update the remaining children if composition relationship one_to_xxx
+                            childrenPromises.push(AgencePhotosDaoProxy.saveOrUpdateListAgencePhotos(p_entity.photos, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
+                    }
                 }
 
 
                 // 2. save or update all the other children (no matter the type of relationship), if asked by p_cascadeset
-                var activite4Idx = p_cascadeSet.indexOf('activite4');
-                if (activite4Idx > -1) {
-                    childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite4, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
-                var activite3Idx = p_cascadeSet.indexOf('activite3');
-                if (activite3Idx > -1) {
-                    childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite3, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
-                var activite2Idx = p_cascadeSet.indexOf('activite2');
-                if (activite2Idx > -1) {
-                    childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite2, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
-                }
-                var activite1Idx = p_cascadeSet.indexOf('activite1');
-                if (activite1Idx > -1) {
-                    childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite1, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                /*jshint loopfunc: true */
+                /* jshint shadow:true */
+                for (var i = 0, cascadeSetLength = p_cascadeSet.length; i < cascadeSetLength; i += 1) {
+                    if (p_cascadeSet[i].entityName === p_entity._type) {
+                        if (p_cascadeSet[i].key === 'ACTIVITE4') {
+                            childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite4, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'ACTIVITE3') {
+                            childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite3, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'ACTIVITE2') {
+                            childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite2, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
+                        if (p_cascadeSet[i].key === 'ACTIVITE1') {
+                            childrenPromises.push(ActiviteDaoProxy.saveOrUpdateActivite(p_entity.activite1, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete));
+                            continue;
+                        }
+                    }
                 }
 
 
@@ -2398,7 +2406,7 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
                         pointersDeletes.push(ClientDaoProxy.deleteListClient(p_entity.clients, p_context, p_cascadeSet, p_toSync));
 
                         // 2. for composition relationships one_to_xxx : ALWAYS delete children "nested" in the parent :
-                        pointersDeletes.push(AgenceDetailDaoProxy.deleteListAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
+                        pointersDeletes.push(AgenceDetailDaoProxy.deleteAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
 
                         // 2. for composition relationships one_to_xxx : ALWAYS delete children "nested" in the parent :
                         pointersDeletes.push(AgencePhotosDaoProxy.deleteListAgencePhotos(p_entity.photos, p_context, p_cascadeSet, p_toSync));
@@ -2406,15 +2414,17 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
 
                         // 3. for aggregation relationships one_to_xxx
 
-                        var employeesIdx = p_cascadeSet.indexOf('employees');
-
-                        // 	3.1. if asked in p_cascadeset, delete the other children pointing the parent
-                        if (employeesIdx > -1) {
-                            p_cascadeSet.splice(employeesIdx, 1);
-                            pointersDeletes.push(EmployeeDaoProxy.deleteListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync));
-                            //  3.2  otherwise, just clear FKs pointing the parent				} else {
-                            for (var i = 0; i < p_entity.employees; i++) {
-                                p_entity.employees[i] = null;
+                        /*jshint loopfunc: true */
+                        /* jshint shadow:true */
+                        for (var i = 0, cascadeSetLength = p_cascadeSet.length; i < cascadeSetLength; i += 1) {
+                            if (p_cascadeSet[i].entityName === p_entity._type) {
+                                if (p_cascadeSet[i].key === 'EMPLOYEES') {
+                                    pointersDeletes.push(EmployeeDaoProxy.deleteListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync));
+                                    //  3.2  otherwise, just clear FKs pointing the parent				} else {
+                                    for (var i = 0; i < p_entity.employees; i++) {
+                                        p_entity.employees[i] = null;
+                                    }
+                                }
                             }
                         }
 
@@ -2428,46 +2438,40 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
                                         pointersDeletes = [];
 
                                         //5. for composition and aggregation relationships xxx_to_one
-                                        var activite4Idx = p_cascadeSet.indexOf('activite4');
-                                        // 	5.1. ONLY IF asked in p_cascadeset, delete children
-                                        if (activite4Idx > -1) {
-                                            p_cascadeSet.splice(activite4Idx, 1);
-                                            pointersDeletes.push(ActiviteDaoProxy.deleteListActivite(p_entity.activite4, p_context, p_cascadeSet, p_toSync));
-                                        }
+                                        /*jshint loopfunc: true */
+                                        /* jshint shadow:true */
+                                        for (var i = 0, cascadeSetLength = p_cascadeSet.length; i < cascadeSetLength; i += 1) {
+                                            if (p_cascadeSet[i].entityName === p_entity._type) {
+                                                if (p_cascadeSet[i].key === 'ACTIVITE4') {
+                                                    pointersDeletes.push(ActiviteDaoProxy.deleteActivite(p_entity.activite4, p_context, p_cascadeSet, p_toSync));
+                                                    continue;
+                                                }
 
-                                        var detailIdx = p_cascadeSet.indexOf('detail');
-                                        // 	5.1. ONLY IF asked in p_cascadeset, delete children
-                                        if (detailIdx > -1) {
-                                            p_cascadeSet.splice(detailIdx, 1);
-                                            pointersDeletes.push(AgenceDetailDaoProxy.deleteListAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
-                                        }
+                                                if (p_cascadeSet[i].key === 'DETAIL') {
+                                                    pointersDeletes.push(AgenceDetailDaoProxy.deleteAgenceDetail(p_entity.detail, p_context, p_cascadeSet, p_toSync));
+                                                    continue;
+                                                }
 
-                                        var activite3Idx = p_cascadeSet.indexOf('activite3');
-                                        // 	5.1. ONLY IF asked in p_cascadeset, delete children
-                                        if (activite3Idx > -1) {
-                                            p_cascadeSet.splice(activite3Idx, 1);
-                                            pointersDeletes.push(ActiviteDaoProxy.deleteListActivite(p_entity.activite3, p_context, p_cascadeSet, p_toSync));
-                                        }
+                                                if (p_cascadeSet[i].key === 'ACTIVITE3') {
+                                                    pointersDeletes.push(ActiviteDaoProxy.deleteActivite(p_entity.activite3, p_context, p_cascadeSet, p_toSync));
+                                                    continue;
+                                                }
 
-                                        var activite2Idx = p_cascadeSet.indexOf('activite2');
-                                        // 	5.1. ONLY IF asked in p_cascadeset, delete children
-                                        if (activite2Idx > -1) {
-                                            p_cascadeSet.splice(activite2Idx, 1);
-                                            pointersDeletes.push(ActiviteDaoProxy.deleteListActivite(p_entity.activite2, p_context, p_cascadeSet, p_toSync));
-                                        }
+                                                if (p_cascadeSet[i].key === 'ACTIVITE2') {
+                                                    pointersDeletes.push(ActiviteDaoProxy.deleteActivite(p_entity.activite2, p_context, p_cascadeSet, p_toSync));
+                                                    continue;
+                                                }
 
-                                        var activite1Idx = p_cascadeSet.indexOf('activite1');
-                                        // 	5.1. ONLY IF asked in p_cascadeset, delete children
-                                        if (activite1Idx > -1) {
-                                            p_cascadeSet.splice(activite1Idx, 1);
-                                            pointersDeletes.push(ActiviteDaoProxy.deleteListActivite(p_entity.activite1, p_context, p_cascadeSet, p_toSync));
-                                        }
+                                                if (p_cascadeSet[i].key === 'ACTIVITE1') {
+                                                    pointersDeletes.push(ActiviteDaoProxy.deleteActivite(p_entity.activite1, p_context, p_cascadeSet, p_toSync));
+                                                    continue;
+                                                }
 
-                                        var mainClientIdx = p_cascadeSet.indexOf('mainClient');
-                                        // 	5.1. ONLY IF asked in p_cascadeset, delete children
-                                        if (mainClientIdx > -1) {
-                                            p_cascadeSet.splice(mainClientIdx, 1);
-                                            pointersDeletes.push(ClientDaoProxy.deleteListClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync));
+                                                if (p_cascadeSet[i].key === 'MAINCLIENT') {
+                                                    pointersDeletes.push(ClientDaoProxy.deleteClient(p_entity.mainClient, p_context, p_cascadeSet, p_toSync));
+                                                    continue;
+                                                }
+                                            }
                                         }
 
                                         $qSync.all(pointersDeletes).then(

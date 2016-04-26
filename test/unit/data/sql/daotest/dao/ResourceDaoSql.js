@@ -263,11 +263,13 @@ deferred.reject(returnedError_executeQueryToRead);
 						// 		3.1  call saveOrUpdate function of the child dao
 						// 		3.2  check that the ID attribute of the children model entities is updated (update foreign key of the parent pointing the child just saved)
 
-						var reservationsIdx = p_cascadeSet.indexOf('reservations');
-						if( reservationsIdx > -1) {
-							p_cascadeSet.splice(reservationsIdx, 1);
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'RESERVATIONS') {
 							saveOtherChildren.push( ReservationDaoProxy.saveOrUpdateListReservation(p_entity.reservations, p_context, p_cascadeSet, p_toSync) );
-						}
+}
+		}
+		}
 
 
 						$qSync.all(saveOtherChildren).then(
@@ -377,10 +379,10 @@ deferred.reject(returnedError_executeQueryToRead);
 
 		self.fixDoubleWaysRelationship(p_entity);
 		// for composition relationships one_to_xxx
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
 
-		var reservationsIdx = p_cascadeSet.indexOf('reservations');
-		if( reservationsIdx > -1) {
-			p_cascadeSet.splice(reservationsIdx, 1);
+if( p_cascadeSet[i].key === 'RESERVATIONS') {
 
 			// 1. delete the children that are not in p_entity if composition relationship one_to_xxx (delete from CHILD where PARENTID=xxx and CHILDID not in(xxx, xxx)
 			childrenPromises.push(
@@ -397,6 +399,8 @@ deferred.reject(returnedError_executeQueryToRead);
 
 			// 2. save or update the remaining children if composition relationship one_to_xxx
 			childrenPromises.push( ReservationDaoProxy.saveOrUpdateListReservation(p_entity.reservations, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
+		}
+		}
 		}
 
 

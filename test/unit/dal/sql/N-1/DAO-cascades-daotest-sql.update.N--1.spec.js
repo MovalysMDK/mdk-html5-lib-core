@@ -32,7 +32,6 @@ describe('DAO-cascades-daotest-sql.update.N--1.spec.js', function () {
                     entity.notation = 666;
                     entity.agence.nom = 'Nom3Modified';
                     entity.agence.employees[0].firstName = 'Firstname3Modified';
-
                     AgenceDetailDaoSql.updateAgenceDetail(entity, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE], false, []).then(function (updatedEntity) {
                         AgenceDetailDaoSql.getAgenceDetailById(3, context, [AgenceCascade.EMPLOYEES, AgenceDetailCascade.AGENCE]).then(function (entity) {
                             expect(entity).not.toBeNull();

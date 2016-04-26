@@ -550,9 +550,12 @@ deferred.reject(returnedError_executeQueryToRead);
 
 
 		// 2. save or update all the other children (no matter the type of relationship), if asked by p_cascadeset
-		var employeesIdx = p_cascadeSet.indexOf('employees');
-		if( employeesIdx > -1) {
+/*jshint loopfunc: true *//* jshint shadow:true */for (var i = 0 , cascadeSetLength = p_cascadeSet.length ; i < cascadeSetLength ; i += 1) {
+if( p_cascadeSet[i].entityName === p_entity._type ) {
+if( p_cascadeSet[i].key === 'EMPLOYEES') {
 			childrenPromises.push( EmployeeDaoProxy.saveOrUpdateListEmployee(p_entity.employees, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete) );
+		}
+		}
 		}
 
 

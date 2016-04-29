@@ -43,13 +43,11 @@ describe('DAO-cascades-daotest-sql.create.1--N.spec.js', function () {
                     client1.prenom = 'client1';
                     client1.telephone = 'client1';
                     client1.email = 'client1';
-                    client1.agency = AgenceFactory.createInstance();
                     var client2 = ClientFactory.createInstance();
                     client2.nom = 'client2';
                     client2.prenom = 'client2';
                     client2.telephone = 'client2';
                     client2.email = 'client2';
-                    client2.agency = AgenceFactory.createInstance();
                     agence.nom = 'NewName';
                     agence.rue = 'NewStreet';
                     agence.codepostal = 'NewCP';

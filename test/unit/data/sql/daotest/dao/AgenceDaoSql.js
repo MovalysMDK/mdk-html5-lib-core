@@ -2087,7 +2087,7 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
                                 self.getChildrenIdsToRemove(p_context, p_entity, 'detail').then(
                                     function (idsToRemove) {
                                         console.log('children to remove found', idsToRemove);
-                                        return AgenceDetailDaoProxy.deleteAgenceDetailById(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                        return AgenceDetailDaoProxy.deleteListAgenceDetailByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
                                     },
                                     function (error) {
                                         deferred.reject(error);
@@ -2127,7 +2127,7 @@ angular.module('data-daotest-sql').factory('AgenceDaoSql',
                                 self.getChildrenIdsToRemove(p_context, p_entity, 'mainClient').then(
                                     function (idsToRemove) {
                                         console.log('children to remove found', idsToRemove);
-                                        return ClientDaoProxy.deleteClientById(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+                                        return ClientDaoProxy.deleteListClientByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
                                     },
                                     function (error) {
                                         deferred.reject(error);

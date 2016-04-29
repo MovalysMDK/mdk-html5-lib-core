@@ -514,7 +514,7 @@ if( p_cascadeSet[i].key === 'AGENCE') {
 				self.getChildrenIdsToRemove(p_context, p_entity, 'agence').then(
 					function(idsToRemove) {
 						console.log('children to remove found', idsToRemove);
-						return AgenceDaoProxy.deleteAgenceById(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
+						return AgenceDaoProxy.deleteListAgenceByIds(idsToRemove, p_context, p_cascadeSet, p_toSync, p_cascadeSetForDelete);
 					},
 					function(error) {
 						deferred.reject(error);

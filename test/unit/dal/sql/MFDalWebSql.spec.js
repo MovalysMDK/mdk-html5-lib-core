@@ -73,7 +73,7 @@ describe('MFDalWebSQL', function () {
             for (var i = 0; i < length; i += 1) {
                 tx.executeSql('SELECT * FROM ' + table[i], [], function (t, data) {
                     number += 1;
-                    if (data.rows.length !== 17) {
+                    if (data.rows.length !== 17  ) {
                         test = false;
                     }
                 }, function () {

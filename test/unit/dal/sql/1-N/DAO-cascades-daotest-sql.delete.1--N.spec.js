@@ -1,7 +1,7 @@
 'use strict';
 
-describe('DAO-cascades-daotest-sql.delete.1--1.spec.js', function () {
-    var dbName = 'DeleteCascade-1-1';
+describe('DAO-cascades-daotest-sql.delete.1--N.spec.js', function () {
+    var dbName = 'DeleteCascade-1-N';
     var $TestService;
     var $rootScope;
     /* Inject angular dependencies */
@@ -23,22 +23,22 @@ describe('DAO-cascades-daotest-sql.delete.1--1.spec.js', function () {
         }
     });
     /***** Unit test *****/
-    it('should delete  A&B (Relation: A 1--1 B, Main: A). Cascade A.b', function (done) {
-        inject(function (MFContextFactory, AgenceDaoSql, MFDalWebSql, AgenceFactory, ClientFactory, AgenceCascade, AgenceDetailDaoSql) {
+    it('should delete  A&B (Relation: A 1--N B, Main: A). Cascade', function (done) {
+        inject(function (MFContextFactory, AgenceDaoSql, MFDalWebSql, AgenceFactory, ClientFactory, AgenceCascade,ClientDaoSql) {
             var context = MFContextFactory.createInstance();
             MFDalWebSql.dbConnection.transaction(function (t) {
                 context.dbTransaction = t;
-                AgenceDaoSql.getAgenceById(2, context, [AgenceCascade.DETAIL]).then(function (entity) {
+                AgenceDaoSql.getAgenceById(2, context, [AgenceCascade.CLIENTS]).then(function (entity) {
                     expect(entity).not.toBeNull();
                     if (entity) { //
                         expect(entity.nom).toEqual('Nom2');
-                        expect(entity.detail).not.toBeNull();
-                        expect(entity.detail.notation).toEqual(2);
+                        expect(entity.clients).not.toBeNull();
+                        expect(entity.clients.length).toEqual(1);
                     }
-                    AgenceDaoSql.deleteAgenceById(2, context, [AgenceCascade.DETAIL], false).then(function () {
+                    AgenceDaoSql.deleteAgenceById(2, context, [AgenceCascade.CLIENTS], false).then(function() {
                         AgenceDaoSql.getAgenceById(2, context, []).then(function (entity) {
                             expect(entity).not.toBeDefined();
-                            AgenceDetailDaoSql.getAgenceDetailById(2, context, []).then(function (entity) {
+                            ClientDaoSql.getClientById(2, context, []).then(function (entity) {
                                 expect(entity).not.toBeDefined();
                                 done();
                             });

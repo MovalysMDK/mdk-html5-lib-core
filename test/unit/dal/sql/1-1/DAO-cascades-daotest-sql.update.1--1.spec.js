@@ -4,7 +4,6 @@ describe('DAO-cascades-daotest-sql.update.1--1.spec.js', function () {
     var dbName = 'UpdateCascade-1-1';
     var $TestService;
     var $rootScope;
-    var flag = false;
     /* Inject angular dependencies */
     /* Set MFCore configuration */
     /* Prepare HTTP Responses */

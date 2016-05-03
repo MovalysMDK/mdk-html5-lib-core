@@ -108,7 +108,7 @@ Client._Parent.call(this);
 			objet cible
 			<p> targetEntity=Agence
 			obligatoire
-			 mandatory=true
+			 mandatory=false
 			proprietaire de la relation
 			 relationOwner=true
 			transient

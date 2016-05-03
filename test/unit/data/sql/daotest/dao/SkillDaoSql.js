@@ -776,9 +776,9 @@ if( p_cascadeSet[i].key === 'EMPLOYEES') {
 
 				// 1. delete association records : for relationships many_to_many
 				var o_sqlQuery = 'delete from T_EMPLSKILL' + 
-								'inner join T_EMPLSKILL on ' + 
-								'		T_SKILL.ID = T_EMPLSKILL.SKILLID' + 
-								'	where ' + 
+								' inner join T_EMPLSKILL on ' + 
+								' T_SKILL.ID = T_EMPLSKILL.SKILLID' + 
+								' where ' + 
 								'		T_SKILL.SKILLID = ?;';
 				var o_sqlParameters = [].concat(p_entity.idToString);
 				pointersDeletes.push( self.executeQueryToWrite(

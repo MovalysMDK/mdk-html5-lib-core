@@ -1,6 +1,6 @@
 'use strict';
 /**
- *
+ * 
  *
  * <p>Copyright (c) 2010</p>
  * <p>Company: Adeuza</p>
@@ -11,34 +11,34 @@
 //@non-generated-end
 
 angular.module('data-daotest-sql').factory('ActiviteDaoMapping',
-    [
+[
 //@non-generated-start[dependencies-names][X]
 //@non-generated-end
 
 //@non-generated-start[dependencies-classes][X]
-        function (//@non-generated-end
-        ) {
+function (
+//@non-generated-end
+) {
 
-            return {
+	return {
 
 //@non-generated-start[mapping][X]
-                mappingSql: {
-                    rightFactory: 'ActiviteFactory',
-                    attributes: [
-                        {leftAttr: 'ID', rightAttr: 'id', identifier: true},
-                        {leftAttr: 'LABEL', rightAttr: 'label'}
-                    ]
-                },
+		mappingSql: {
+rightFactory: 'ActiviteFactory',
+attributes: [
+{leftAttr: 'ID', rightAttr: 'id', identifier: true},
+{leftAttr: 'LABEL', rightAttr: 'label'}
+]
+			},
 
-                mappingNoSql: {
-                    rightFactory: 'ActiviteFactory',
-                    attributes: [
-                        {leftAttr: 'id', rightAttr: 'id', identifier: true},
-                        {leftAttr: 'label', rightAttr: 'label'}
-                    ]
-                }
+		mappingNoSql: {rightFactory: 'ActiviteFactory',
+attributes: [
+{leftAttr: 'id', rightAttr: 'id', identifier: true},
+{leftAttr: 'label', rightAttr: 'label'}
+]
+}
 //@non-generated-end
 
-            };
+	};
 
-        }]);
+}]);

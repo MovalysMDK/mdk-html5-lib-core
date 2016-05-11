@@ -1,0 +1,82 @@
+{
+    "Activite": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Skill": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Resource": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Employee": {
+        "keyPath": "id",
+        "createIndex": [{
+            "name": "agenceid",
+            "keyPath": "agenceid",
+            "unique": false
+        }]
+    },
+    "AgencePhotos": {
+        "keyPath": "identifier",
+        "createIndex": [{
+            "name": "photosagenceid",
+            "keyPath": "photosagenceid",
+            "unique": false
+        }]
+    },
+    "AgenceDetail": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Reservation": {
+        "keyPath": "id",
+        "createIndex": [{
+            "name": "resourceid",
+            "keyPath": "resourceid",
+            "unique": false
+        }, {
+            "name": "employeid",
+            "keyPath": "employeid",
+            "unique": false
+        }]
+    },
+    "Client": {
+        "keyPath": "id",
+        "createIndex": [{
+            "name": "agenceid1",
+            "keyPath": "agenceid1",
+            "unique": false
+        }]
+    },
+    "SessionNavigation": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Word": {
+        "keyPath": "id",
+        "createIndex": []
+    },
+    "Agence": {
+        "keyPath": "id",
+        "createIndex": [{
+            "name": "activite4id",
+            "keyPath": "activite4id",
+            "unique": false
+        }, {
+            "name": "detailid",
+            "keyPath": "detailid",
+            "unique": false
+        }, {
+            "name": "activite1id",
+            "keyPath": "activite1id",
+            "unique": false
+        }, {
+            "name": "mainclientid",
+            "keyPath": "mainclientid",
+            "unique": false
+        }]
+    }
+}

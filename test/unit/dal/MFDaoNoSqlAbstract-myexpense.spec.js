@@ -1,7 +1,7 @@
 'use strict';
 
-describe('MFDaoNoSqlAbstract', function() {
-  var dbName = 'MFDaoNoSqlAbstract' ;
+describe('MFDaoNoSqlAbstract-myexpense', function() {
+  var dbName = 'MFDaoNoSqlAbstract-myexpense' ;
   var $q, $rootScope, $httpBackend;
   var tx;
 
@@ -29,7 +29,7 @@ describe('MFDaoNoSqlAbstract', function() {
         MFConfigurationService.setValue('dalPlatformType','browser');
         MFConfigurationService.setValue('dalDatabaseType', 'NoSql');
         // Set log level
-        console.setLogLevel('VERBOSE');
+        console.setLogLevel('WARN');
         
         // Block calls to MFInitScheduler.notify
         spyOn(MFInitScheduler, 'notify');
@@ -123,7 +123,7 @@ describe('MFDaoNoSqlAbstract', function() {
         expect(entity).not.toBeNull();
         if (entity) { // 
           expect(entity.name).toEqual('Sed Dolor Fusce Associates');
-          expect(entity.reports.length).toEqual(0);
+          expect(entity.reports).toBeNull();
         }
         
         done();
@@ -135,19 +135,19 @@ describe('MFDaoNoSqlAbstract', function() {
   });
   
   it('should get a record by its ID (cascade 1 level)', function(done) {
-    inject(function(MFContextFactory, MFDalIndexedDB, MFSystem, CustomerDaoNoSql, MFDalNoSqlProxy) {
+    inject(function(MFContextFactory, MFDalIndexedDB, MFSystem, CustomerDaoNoSql, CustomerCascade, MFDalNoSqlProxy) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
       
-      CustomerDaoNoSql._getRecordById(1,context,['reports']).then(function(entity) {
+      CustomerDaoNoSql._getRecordById(1,context,[CustomerCascade.REPORTS]).then(function(entity) {
         expect(entity).not.toBeNull();
         if (entity) { // Avoid crashing when entity is null (even if we test it above, it will crash)
           expect(entity.name).toEqual('Proin Industries');
           // First level: reports
           expect(entity.reports.length).toEqual(2);
-          // Second level: expenses 
-          expect(entity.reports[0].expenses.length).toEqual(0);
+          // Second level: expenses --> Should not be loaded
+          expect(entity.reports[0].expenses).toBeNull();
         }
         
         done();
@@ -158,12 +158,12 @@ describe('MFDaoNoSqlAbstract', function() {
   });
   
   it('should get a record by its ID (cascade 2 levels)', function(done) {
-    inject(function(MFContextFactory, MFDalIndexedDB, MFSystem, CustomerDaoNoSql, MFDalNoSqlProxy) {
+    inject(function(MFContextFactory, MFDalIndexedDB, MFSystem, CustomerDaoNoSql, MFDalNoSqlProxy, CustomerCascade, ReportCascade) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
       
-      CustomerDaoNoSql._getRecordById(1,context,['reports','expenses']).then(function(entity) {
+      CustomerDaoNoSql._getRecordById(1,context,[CustomerCascade.REPORTS,ReportCascade.EXPENSES]).then(function(entity) {
         expect(entity).not.toBeNull();
         if (entity) { // Avoid crashing when entity is null (even if we test it above, it will crash)
           expect(entity.name).toEqual('Proin Industries');
@@ -183,7 +183,6 @@ describe('MFDaoNoSqlAbstract', function() {
   afterEach(function(done) {
     inject(function(MFDalIndexedDB, MFDalIndexedDBTransaction) {
       waitUntil(function() {
-        console.error(MFDalIndexedDBTransaction.startedTransactions.length);
         return MFDalIndexedDBTransaction.startedTransactions.length === 0; 
       }, 500).then(
           function() {

@@ -1,0 +1,337 @@
+
+Entity#AgenceDetail
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User010_AgenceDetail
+Admable#No
+Title(fr_FR;en_EN)#AgenceDetail;AgenceDetail
+TabTitle(fr_FR;en_EN)#AgenceDetail;AgenceDetail
+Name#ID#AGENCEID#CREATION#NOTATION#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#agenceidentifier;agenceidentifier#creation;creation#notation;notation#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#champ de type datetime;champ de type datetime#champ de type float;champ de type float#
+VisualSize#10#20#30#15#
+SQL FIELD#ID#AGENCEID#CREATION#NOTATION#
+Mandatory#yes#yes#no#no#
+Size#20###14#
+Type#numberid#ref1#datetime#float#
+Option#T_AGENCEDETAIL#number###
+Option2#####
+Unique#yes####
+I18n#
+Reference from##Agence.ID####
+Reference to##Agence.ID####
+Ctrl#
+Req#0##T_AGENCEDETAIL#
+Entity#Activite
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User020_Activite
+Admable#No
+Title(fr_FR;en_EN)#Activite;Activite
+TabTitle(fr_FR;en_EN)#Activite;Activite
+Name#ID#LABEL#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#label;label#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type string;champ de type string#
+VisualSize#10#30#
+SQL FIELD#ID#LABEL#
+Mandatory#yes#yes#
+Size#20#255#
+Type#numberid#string#
+Option#T_ACTIVITE##
+Option2###
+Unique#yes##
+I18n#
+Reference from####
+Reference to####
+Ctrl#
+Req#0##T_ACTIVITE#
+Entity#AgencePhotos
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User030_AgencePhotos
+Admable#No
+Title(fr_FR;en_EN)#AgencePhotos;AgencePhotos
+TabTitle(fr_FR;en_EN)#AgencePhotos;AgencePhotos
+Name#IDENTIFIER#PHOTOSAGENCEID#NAME#URI#DATE#DESC#PHOTOSTATE#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#photosagenceidentifier;photosagenceidentifier#name;name#uri;uri#date;date#desc;desc#photostate;photostate#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#champ de type string;champ de type string#champ de type string;champ de type string#champ de type datetime;champ de type datetime#champ de type string;champ de type string#champ de type enum ( FWK_NONE SELECTED DOWNLOADED TAKEN TODOWNLOAD ) ;champ de type enum ( FWK_NONE SELECTED DOWNLOADED TAKEN TODOWNLOAD ) #
+VisualSize#10#20#30#30#30#30#30#
+SQL FIELD#IDENTIFIER#PHOTOSAGENCEID#PHOTO_NAME#PHOTO_URI#PHOTO_DATE#PHOTO_DESC#PHOTO_PHOTOSTATE#
+Mandatory#yes#yes#no#no#no#no#no#
+Size#20##255#255##255#10#
+Type#numberid#ref1#string#string#datetime#string#value#
+Option#T_AGENCEPHOTOS#number#####FWK_NONE[0];SELECTED[1];DOWNLOADED[2];TAKEN[3];TODOWNLOAD[4];#
+Option2########
+Unique#yes#######
+I18n#
+Reference from##Agence.ID##
+Reference to##Agence.ID##
+Ctrl#
+Req#0##T_AGENCEPHOTOS#
+Entity#Skill
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User040_Skill
+Admable#No
+Title(fr_FR;en_EN)#Skill;Skill
+TabTitle(fr_FR;en_EN)#Skill;Skill
+Name#ID#LABEL#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#label;label#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type string;champ de type string#
+VisualSize#10#30#
+SQL FIELD#ID#LABEL#
+Mandatory#yes#yes#
+Size#20#255#
+Type#numberid#string#
+Option#T_SKILL##
+Option2###
+Unique#yes##
+I18n#
+Reference from####
+Reference to####
+Ctrl#
+Req#0##T_SKILL#
+Entity#Reservation
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User050_Reservation
+Admable#No
+Title(fr_FR;en_EN)#Reservation;Reservation
+TabTitle(fr_FR;en_EN)#Reservation;Reservation
+Name#ID#RESOURCEID#EMPLOYEID#STARTDATE#ENDDATE#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#resourceidentifier;resourceidentifier#employeidentifier;employeidentifier#startdate;startdate#enddate;enddate#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type datetime;champ de type datetime#champ de type datetime;champ de type datetime#
+VisualSize#10#20#20#30#30#
+SQL FIELD#ID#RESOURCEID#EMPLOYEID#STARTDATE#ENDDATE#
+Mandatory#yes#yes#yes#yes#yes#
+Size#20#####
+Type#numberid#ref1#ref1#datetime#datetime#
+Option#T_RESERVATION#number#number###
+Option2######
+Unique#yes#####
+I18n#
+Reference from##Resource.ID#Employee.ID####
+Reference to##Resource.ID#Employee.ID####
+Ctrl#
+Req#0##T_RESERVATION#
+Entity#Employee
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User060_Employee
+Admable#No
+Title(fr_FR;en_EN)#Employee;Employee
+TabTitle(fr_FR;en_EN)#Employee;Employee
+Name#ID#AGENCEID1#FIRSTNAME#LASTNAME#PHOTOIDENTIFIER#NAME#URI#DATE#DESC#PHOTOSTATE#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#agenceidentifier;agenceidentifier#firstname;firstname#lastname;lastname#photoidentifier;photoidentifier#name;name#uri;uri#date;date#desc;desc#photostate;photostate#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#champ de type string;champ de type string#champ de type string;champ de type string#champ de type number;champ de type number#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#
+VisualSize#10#20#30#30#15#0#0#0#0#0#
+SQL FIELD#ID#AGENCEID1#FIRSTNAME#LASTNAME##PHOTO_NAME#PHOTO_URI#PHOTO_DATE#PHOTO_DESC#PHOTO_PHOTOSTATE#
+Mandatory#yes#yes#yes#yes#yes#no#no#no#no#no#
+Size#20##255#255#20#255#255##255#10#
+Type#numberid#ref1#string#string#ref1#string#string#datetime#string#value#
+Option#T_EMPLOYEE#number###numberid#####FWK_NONE[0];SELECTED[1];DOWNLOADED[2];TAKEN[3];TODOWNLOAD[4];#
+Option2#####include######
+Unique#yes####yes######
+I18n#
+Reference from##Agence.ID###EmployeePhoto.ID##
+Reference to##Agence.ID###EmployeePhoto.ID##
+Ctrl#
+Req#0##T_EMPLOYEE#
+Entity#EmployeePhoto
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User061_EmployeePhoto
+Admable#No
+Title(fr_FR;en_EN)#EmployeePhoto;EmployeePhoto
+TabTitle(fr_FR;en_EN)#EmployeePhoto;EmployeePhoto
+Name#ID#NAME#URI#DATE#DESC#PHOTOSTATE#PHOTOEMPLOYEE#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#name;name#uri;uri#date;date#desc;desc#photostate;photostate#photoemployee#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type string;champ de type string#champ de type string;champ de type string#champ de type datetime;champ de type datetime#champ de type string;champ de type string#champ de type enum ( FWK_NONE SELECTED DOWNLOADED TAKEN TODOWNLOAD ) ;champ de type enum ( FWK_NONE SELECTED DOWNLOADED TAKEN TODOWNLOAD ) #champ de type number;champ de type number#
+VisualSize#10#30#30#30#30#30#20#
+SQL FIELD#ID#PHOTO_NAME#PHOTO_URI#PHOTO_DATE#PHOTO_DESC#PHOTO_PHOTOSTATE##
+Mandatory#yes#no#no#no#no#no#yes#
+Size#20#255#255##255#10#20#
+Type#numberid#string#string#datetime#string#value#ref1#
+Option#T_EMPLOYEE#####FWK_NONE[0];SELECTED[1];DOWNLOADED[2];TAKEN[3];TODOWNLOAD[4];##
+Option2########
+Unique#yes######yes#
+I18n#
+Reference from#######Employee.ID#
+Reference to#######Employee.ID#
+Ctrl#
+Req#U##T_EMPLOYEE#
+Entity#Resource
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User070_Resource
+Admable#No
+Title(fr_FR;en_EN)#Resource;Resource
+TabTitle(fr_FR;en_EN)#Resource;Resource
+Name#ID#LABEL#ENABLE#RESOURCETYPE#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#label;label#enable;enable#resourcetype;resourcetype#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type string;champ de type string#champ de type boolean ( yes , no );champ de type boolean ( yes , no )#champ de type enum ( MATERIAL ROOM OTHER ) ;champ de type enum ( MATERIAL ROOM OTHER ) #
+VisualSize#10#30#15#30#
+SQL FIELD#ID#LABEL#ENABLE#RESOURCETYPE#
+Mandatory#yes#yes#yes#yes#
+Size#20#255#1#10#
+Type#numberid#string#value#value#
+Option#T_RESOURCE##yes[1];no[0];#MATERIAL[1];ROOM[2];OTHER[3];#
+Option2#####
+Unique#yes####
+I18n#
+Reference from######
+Reference to######
+Ctrl#
+Req#0##T_RESOURCE#
+Entity#Client
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User080_Client
+Admable#No
+Title(fr_FR;en_EN)#Client;Client
+TabTitle(fr_FR;en_EN)#Client;Client
+Name#ID#AGENCEID12#AGENCYID#NOM#PRENOM#TELEPHONE#EMAIL#POSITIONIDENTIFIER#LATITUDE#LONGITUDE#COMPL#STREET#CITY#COUNTRY#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#agenceidentifier;agenceidentifier#agencyidentifier;agencyidentifier#nom;nom#prenom;prenom#telephone;telephone#email;email#positionidentifier;positionidentifier#latitude;latitude#longitude;longitude#compl;compl#street;street#city;city#country;country#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type number;champ de type number#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#
+VisualSize#10#20#20#40#30#30#30#15#0#0#0#0#0#0#
+SQL FIELD#ID#AGENCEID12#AGENCYID#NOM#PRENOM#TELEPHONE#EMAIL##POSITION_LATITUDE#POSITION_LONGITUDE#POSITION_COMPL#POSITION_STREET#POSITION_CITY#POSITION_COUNTRY#
+Mandatory#yes#no#yes#yes#yes#yes#yes#yes#no#no#no#no#no#no#
+Size#20###30#255#255#255#20#30#30#255#255#255#255#
+Type#numberid#ref1#ref1#string#string#string#string#ref1#float#float#string#string#string#string#
+Option#T_CLIENT#number#number#####numberid#######
+Option2########include#######
+Unique#yes######yes#yes#######
+I18n#
+Reference from##Agence.ID#Agence.ID#####ClientPosition.ID##
+Reference to##Agence.ID#Agence.ID#####ClientPosition.ID##
+Ctrl#
+Req#0##T_CLIENT#
+Entity#ClientPosition
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User081_ClientPosition
+Admable#No
+Title(fr_FR;en_EN)#ClientPosition;ClientPosition
+TabTitle(fr_FR;en_EN)#ClientPosition;ClientPosition
+Name#ID#LATITUDE#LONGITUDE#COMPL#STREET#CITY#COUNTRY#POSITIONCLIENT#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#latitude;latitude#longitude;longitude#compl;compl#street;street#city;city#country;country#positionclient#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type float;champ de type float#champ de type float;champ de type float#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type number;champ de type number#
+VisualSize#10#15#15#30#30#30#30#20#
+SQL FIELD#ID#POSITION_LATITUDE#POSITION_LONGITUDE#POSITION_COMPL#POSITION_STREET#POSITION_CITY#POSITION_COUNTRY##
+Mandatory#yes#no#no#no#no#no#no#yes#
+Size#20#30#30#255#255#255#255#20#
+Type#numberid#float#float#string#string#string#string#ref1#
+Option#T_CLIENT########
+Option2#########
+Unique#yes#######yes#
+I18n#
+Reference from########Client.ID#
+Reference to########Client.ID#
+Ctrl#
+Req#U##T_CLIENT#
+Entity#Agence
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User090_Agence
+Admable#No
+Title(fr_FR;en_EN)#Agence;Agence
+TabTitle(fr_FR;en_EN)#Agence;Agence
+Name#ID#ACTIVITE4ID#DETAILID#ACTIVITE3ID#ACTIVITE2ID#ACTIVITE1ID#MAINCLIENTID#NOM#RUE#CODEPOSTAL#VILLE#WEBSITE#PHONE#DECIMAL#POSITIONIDENTIFIER#LATITUDE#LONGITUDE#COMPL#STREET#CITY#COUNTRY#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#activite4identifier;activite4identifier#detailidentifier;detailidentifier#activite3identifier;activite3identifier#activite2identifier;activite2identifier#activite1identifier;activite1identifier#mainclientidentifier;mainclientidentifier#nom;nom#rue;rue#codepostal;codepostal#ville;ville#website;website#phone;phone#decimal;decimal#positionidentifier;positionidentifier#latitude;latitude#longitude;longitude#compl;compl#street;street#city;city#country;country#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type number;champ de type number#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type float;champ de type float#champ de type number;champ de type number#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#champ hidden;champ hidden#
+VisualSize#10#20#20#20#20#20#20#30#30#30#30#30#30#15#15#0#0#0#0#0#0#
+SQL FIELD#ID#ACTIVITE4ID#DETAILID#ACTIVITE3ID#ACTIVITE2ID#ACTIVITE1ID#MAINCLIENTID#NOM#RUE#CODEPOSTAL#VILLE#WEBSITE#PHONE#DECIMAL##POSITION_LATITUDE#POSITION_LONGITUDE#POSITION_COMPL#POSITION_STREET#POSITION_CITY#POSITION_COUNTRY#
+Mandatory#yes#yes#yes#yes#no#no#yes#yes#yes#yes#yes#yes#yes#yes#yes#no#no#no#no#no#no#
+Size#20#######255#255#255#255#255#255#14#20#30#30#255#255#255#255#
+Type#numberid#ref1#ref1#ref1#ref1#ref1#ref1#string#string#string#string#string#string#float#ref1#float#float#string#string#string#string#
+Option#T_AGENCE#number#number#number#number#number#number########numberid#######
+Option2###############include#######
+Unique#yes#######yes#######yes#######
+I18n#
+Reference from##Activite.ID#AgenceDetail.ID#Activite.ID#Activite.ID#Activite.ID#Client.ID########AgencePosition.ID##
+Reference to##Activite.ID#AgenceDetail.ID#Activite.ID#Activite.ID#Activite.ID#Client.ID########AgencePosition.ID##
+Ctrl#
+Req#0##T_AGENCE#
+Entity#AgencePosition
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User091_AgencePosition
+Admable#No
+Title(fr_FR;en_EN)#AgencePosition;AgencePosition
+TabTitle(fr_FR;en_EN)#AgencePosition;AgencePosition
+Name#ID#LATITUDE#LONGITUDE#COMPL#STREET#CITY#COUNTRY#POSITIONAGENCE#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#latitude;latitude#longitude;longitude#compl;compl#street;street#city;city#country;country#positionagence#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type float;champ de type float#champ de type float;champ de type float#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type string;champ de type string#champ de type number;champ de type number#
+VisualSize#10#15#15#30#30#30#30#20#
+SQL FIELD#ID#POSITION_LATITUDE#POSITION_LONGITUDE#POSITION_COMPL#POSITION_STREET#POSITION_CITY#POSITION_COUNTRY##
+Mandatory#yes#no#no#no#no#no#no#yes#
+Size#20#30#30#255#255#255#255#20#
+Type#numberid#float#float#string#string#string#string#ref1#
+Option#T_AGENCE########
+Option2#########
+Unique#yes#######yes#
+I18n#
+Reference from########Agence.ID#
+Reference to########Agence.ID#
+Ctrl#
+Req#U##T_AGENCE#
+Entity#Word
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User100_Word
+Admable#No
+Title(fr_FR;en_EN)#Word;Word
+TabTitle(fr_FR;en_EN)#Word;Word
+Name#ID#NOM#
+Module#
+Label(fr_FR;en_EN)#identifier;identifier#nom;nom#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type string;champ de type string#
+VisualSize#10#30#
+SQL FIELD#ID#NOM#
+Mandatory#yes#yes#
+Size#20#255#
+Type#numberid#string#
+Option#T_WORD##
+Option2###
+Unique#yes##
+I18n#
+Reference from####
+Reference to####
+Ctrl#
+Req#0##T_WORD#
+Entity#EmplSkill
+Group#generated_model
+Products#NAME_PRODUCT
+FileName#User110_Skill-employees_Employee-skills
+Admable#No
+Title(fr_FR;en_EN)#EmplSkill;EmplSkill
+TabTitle(fr_FR;en_EN)#EmplSkill;EmplSkill
+Name#EMPLOYEEID#SKILLID#
+Module#
+Label(fr_FR;en_EN)#employeeid;employeeid#skillid;skillid#
+Comment(fr_FR;en_EN)#champ de type number;champ de type number#champ de type number;champ de type number#
+VisualSize#10#10#
+SQL FIELD#EMPLOYEEID#SKILLID#
+Mandatory#yes#yes#
+Size#20#20#
+Type#ref1#ref1#
+Option#T_EMPLSKILL#T_EMPLSKILL#
+Option2###
+Unique#no#no#
+I18n#
+Reference from#Employee.ID#Skill.ID#
+Reference to#Employee.ID#Skill.ID#
+Ctrl#
+Req#0##T_EMPLSKILL#

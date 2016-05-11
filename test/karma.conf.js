@@ -18,21 +18,21 @@ module.exports = function (config) {
             'vendor/modernizr/modernizr.js',
             'lib/mfcoreModule.js',
             /* MY EXPENSE DATA NOSQL */
-            /*'test/unit/data/nosql/myexpense/mappings/moduleImport.js',
-             'test/unit/data/nosql/myexpense/factories/!*.js',
-             'test/unit/data/nosql/myexpense/mappings/!*.js',
-             'test/unit/data/nosql/myexpense/converters/!*.js',
-             'test/unit/data/nosql/myexpense/dao/!*.js',
-             'test/unit/data/nosql/myexpense/model/!*.js',
-             'test/unit/data/nosql/myexpense/model/cascades/!*.js',*/
+            'test/unit/data/nosql/myexpense/mappings/moduleImport.js',
+             'test/unit/data/nosql/myexpense/factories/*.js',
+             'test/unit/data/nosql/myexpense/mappings/*.js',
+             'test/unit/data/nosql/myexpense/converters/*.js',
+             'test/unit/data/nosql/myexpense/dao/*.js',
+             'test/unit/data/nosql/myexpense/model/*.js',
+             'test/unit/data/nosql/myexpense/model/cascades/*.js',
             /* DAO TEST DATA NOSQL */
-            /* 'test/unit/data/nosql/daotest/mappings/moduleImport.js',
-             'test/unit/data/nosql/daotest/factories/!*.js',
-             'test/unit/data/nosql/daotest/mappings/!*.js',
-             'test/unit/data/nosql/daotest/converters/!*.js',
-             'test/unit/data/nosql/daotest/dao/!*.js',
-             'test/unit/data/nosql/daotest/model/!*.js',
-             'test/unit/data/nosql/daotest/model/cascades/!*.js',*/
+             'test/unit/data/nosql/daotest/mappings/moduleImport.js',
+             'test/unit/data/nosql/daotest/factories/*.js',
+             'test/unit/data/nosql/daotest/mappings/*.js',
+             'test/unit/data/nosql/daotest/converters/*.js',
+             'test/unit/data/nosql/daotest/dao/*.js',
+             'test/unit/data/nosql/daotest/model/*.js',
+             'test/unit/data/nosql/daotest/model/cascades/*.js',
             /* DAO TEST DATA SQL */
             'test/unit/data/sql/daotest/Tools/constant.js',
             'test/unit/data/sql/daotest/Tools/CreateUserTable.js',
@@ -47,16 +47,10 @@ module.exports = function (config) {
             'test/unit/data/sql/daotest/model/cascades/*.js',
             /* COMMON */
             'lib/**/*.js',
-            /*'test/!**!/!*.spec.js',*/
-            'test/unit/dal/sql/MFDalWebSql.spec.js',
-            'test/unit/dal/sql/1-N/*.spec.js',
-            'test/unit/dal/sql/N-1/*.spec.js',
-            'test/unit/dal/sql/1-1/*.spec.js',
-            //'test/unit/dal/sql/1-N/DAO-cascades-daotest-sql.update.1--N.spec.js',
-            'test/unit/tools.js'
+            'test/**/*.spec.js',
+            'test/unit/tools.js',
             // assets
-            /*{ pattern: 'test/unit/data/!**!/!*.json', included: false, served: true },*/
-            //{pattern: 'test/unit/data/**/*.sql', included: false, served: true}
+            { pattern: 'test/unit/data/**/*.json', included: false, served: true }
         ],
 
         plugins: [

@@ -127,8 +127,7 @@ describe('DAO-cascades-daotest.delete.1--N.spec.js', function () {
         
         if (entity) { // 
           expect(entity.nom).toEqual('Nom2');
-          expect(entity.clients).not.toBeNull();
-          expect(entity.clients.length).toEqual(1);
+          expect(entity.clients).toBeNull();
         }
     
         AgenceDaoNoSql._deleteRecordById(2, context, [], false).then(function() {

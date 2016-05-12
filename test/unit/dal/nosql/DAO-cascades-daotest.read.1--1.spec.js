@@ -125,8 +125,7 @@ describe('DAO-cascades-daotest.read.1--1.spec.js', function () {
         expect(entity).not.toBeNull();
         if (entity) { // 
           expect(entity.nom).toEqual('Nom1');
-          expect(entity.detail).not.toBeNull();
-          expect(entity.detail.notation).toEqual(1);
+          expect(entity.detail).toBeNull();
         }
 
         done();

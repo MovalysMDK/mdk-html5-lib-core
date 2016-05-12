@@ -135,7 +135,7 @@ describe('DAO-cascades-daotest.read.1--N.spec.js', function () {
     });
   });
   
-  it('should get A&B (Relation: A 1<>--N B, Main: A). No cascade requested', function (done) {
+  it('should get A (Relation: A 1<>--N B, Main: A). No cascade requested', function (done) {
      inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
@@ -149,10 +149,8 @@ describe('DAO-cascades-daotest.read.1--N.spec.js', function () {
         expect(entity).not.toBeNull();
         if (entity) { // 
           expect(entity.nom).toEqual('Nom3');
-          expect(entity.clients).not.toBeNull();
-          expect(entity.clients.length).toEqual(1);
-          expect(entity.clients[0].email).toEqual('email@here.com3');
-        }
+          expect(entity.clients).toBeNull();
+          }
 
           // Set back old value
           AgenceDaoNoSql.cascadeDefinition.clients.composite = oldValue;

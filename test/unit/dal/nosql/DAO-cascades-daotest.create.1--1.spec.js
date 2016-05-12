@@ -116,7 +116,7 @@ describe('DAO-cascades-daotest.create.1--1.spec.js', function () {
   
   // 1<>--1 (Composite)
   it('should save A&B (Relation: A 1<>--1 B, Main: A). No cascade requested', function (done) {
-    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceFactory, AgenceDetailFactory, ClientFactory) {
+    inject(function (MFContextFactory, AgenceDaoNoSql, AgenceCascade, MFDalNoSqlProxy, AgenceFactory, AgenceDetailFactory, ClientFactory) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
@@ -130,8 +130,8 @@ describe('DAO-cascades-daotest.create.1--1.spec.js', function () {
         agence.detail = AgenceDetailFactory.createInstance();
         agence.detail.notation = 666;
         
-        AgenceDaoNoSql._saveRecord(agence, context, [], false, []).then(function (savedEntity) {
-          AgenceDaoNoSql._getRecordById(-2, context, []).then(function (entity) {
+        AgenceDaoNoSql._saveRecord(agence, context, [AgenceCascade.DETAIL], false, []).then(function (savedEntity) {
+          AgenceDaoNoSql._getRecordById(-2, context, [AgenceCascade.DETAIL]).then(function (entity) {
             expect(entity).not.toBeNull();
             if (entity) { // 
               expect(entity.nom).toEqual('NewName');

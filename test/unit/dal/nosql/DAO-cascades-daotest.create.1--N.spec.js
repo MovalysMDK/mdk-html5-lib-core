@@ -115,13 +115,13 @@ describe('DAO-cascades-daotest.create.1--N.spec.js', function () {
   /***** Unit test *****/
   
   // 1<>--N (Composite)
-  it('should save A&B (Relation: A 1<>--N B, Main: A). No cascade requested', function (done) {
+  it('should save A and not B (Relation: A 1<>--N B, Main: A). No cascade used', function (done) {
     inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceFactory, AgenceDetailFactory, ClientFactory) {
       tx = MFDalNoSqlProxy.openTransaction();
       var context = MFContextFactory.createInstance();
       context.dbTransaction = tx;
 
-      // Force the composite:false for the test
+      // Force the composite:true for the test
       AgenceDaoNoSql.cascadeDefinition.clients.composite = true;
       
       AgenceDaoNoSql._getRecordById(-2, context, []).then(function (entity) {
@@ -141,7 +141,7 @@ describe('DAO-cascades-daotest.create.1--N.spec.js', function () {
             expect(entity).not.toBeNull();
             if (entity) { // 
               expect(entity.nom).toEqual('NewName');
-              expect(entity.clients.length).toEqual(2);
+              expect(entity.clients).toBeNull();
             }
      
             done();
@@ -197,6 +197,46 @@ describe('DAO-cascades-daotest.create.1--N.spec.js', function () {
     });
   });
 
+  // 1--N
+  it('should save A&B (Relation: A 1--N B, Main: A). Cascade: A.b and composite:true', function (done) {
+    inject(function (MFContextFactory, AgenceDaoNoSql, MFDalNoSqlProxy, AgenceFactory, AgenceDetailFactory, ClientFactory, AgenceCascade) {
+      tx = MFDalNoSqlProxy.openTransaction();
+      var context = MFContextFactory.createInstance();
+      context.dbTransaction = tx;
+
+      AgenceDaoNoSql.cascadeDefinition.clients.composite = true;
+
+      AgenceDaoNoSql._getRecordById(-2, context, []).then(function (entity) {
+        expect(entity).toBeNull();
+
+        // Create data
+        var agence = AgenceFactory.createInstance();
+        agence.nom = 'NewName';
+        agence.detail = AgenceDetailFactory.createInstance();
+        agence.clients = [];
+        agence.clients.push(ClientFactory.createInstance());
+        agence.clients.push(ClientFactory.createInstance());
+
+        AgenceDaoNoSql._saveRecord(agence, context, [AgenceCascade.CLIENTS], false, []).then(function(savedEntity) {
+
+          AgenceDaoNoSql._getRecordById(-2, context, [AgenceCascade.CLIENTS]).then(function (entity) {
+            expect(entity).not.toBeNull();
+            if (entity) { //
+              expect(entity.nom).toEqual('NewName');
+              expect(entity.clients.length).toEqual(2);
+            }
+
+            done();
+          });
+        });
+
+
+      });
+
+      // Resolve promises and http requests
+      $rootScope.$apply();
+    });
+  });
 
   afterEach(function (done) {
     inject(function (MFDalIndexedDB, MFDalIndexedDBTransaction) {

@@ -123,15 +123,13 @@ describe('DAO-cascades-daotest.update.1--1.spec.js', function () {
 
       AgenceDaoNoSql._getRecordById(1, context, []).then(function (entity) {
         entity.nom = 'Nom1Modified';
-        entity.detail.notation=666;
 
         AgenceDaoNoSql._updateRecord(entity, context, [], false, []).then(function(updatedEntity) {
           AgenceDaoNoSql._getRecordById(1, context, []).then(function (entity) {
             expect(entity).not.toBeNull();
             if (entity) { // 
               expect(entity.nom).toEqual('Nom1Modified');
-              expect(entity.detail).not.toBeNull();
-              expect(entity.detail.notation).toEqual(666);
+              expect(entity.detail).toBeNull();
             }
 
             done();

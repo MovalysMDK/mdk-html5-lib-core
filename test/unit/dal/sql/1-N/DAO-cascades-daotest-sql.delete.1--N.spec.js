@@ -33,14 +33,21 @@ describe('DAO-cascades-daotest-sql.delete.1--N.spec.js', function () {
                     if (entity) { //
                         expect(entity.nom).toEqual('Nom2');
                         expect(entity.clients).not.toBeNull();
-                        expect(entity.clients.length).toEqual(1);
+                        expect(entity.clients.length).toEqual(3);
                     }
                     AgenceDaoSql.deleteAgenceById(2, context, [AgenceCascade.CLIENTS], false).then(function() {
                         AgenceDaoSql.getAgenceById(2, context, []).then(function (entity) {
                             expect(entity).not.toBeDefined();
                             ClientDaoSql.getClientById(2, context, []).then(function (entity) {
                                 expect(entity).not.toBeDefined();
-                                done();
+                                ClientDaoSql.getClientById(3, context, []).then(function (entity) {
+                                    expect(entity).not.toBeDefined();
+                                    ClientDaoSql.getClientById(4, context, []).then(function (entity) {
+                                        expect(entity).not.toBeDefined();
+                                        done();
+                                    });
+                                });
+
                             });
                         });
                     });

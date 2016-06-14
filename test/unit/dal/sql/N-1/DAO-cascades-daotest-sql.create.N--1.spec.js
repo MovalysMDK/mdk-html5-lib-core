@@ -39,14 +39,14 @@ describe('DAO-cascades-daotest-sql.create.N--1.spec.js', function () {
                     client.email = 'NewClient';
                     AgenceDaoSql.getAgenceById(2, context, [AgenceCascade.CLIENTS]).then(function (entity) {
                         expect(entity).not.toBeNull();
-                        expect(entity.clients.length).toEqual(1);
+                        expect(entity.clients.length).toEqual(3);
                         client.agency = entity;
                         client.agence = entity;
                         ClientDaoSql.saveClient(client, context, [ClientCascade.AGENCE], false).then(function (savedEntity) {
                             AgenceDaoSql.getAgenceById(2, context, [AgenceCascade.CLIENTS]).then(function (entity) {
                                 expect(entity).not.toBeNull();
                                 if (entity) { //
-                                    expect(entity.clients.length).toEqual(2);
+                                    expect(entity.clients.length).toEqual(4);
                                     expect(entity.clients[0].prenom).toEqual('LastnameNew');
                                 }
                                 done();

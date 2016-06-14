@@ -157,6 +157,28 @@ describe('DAO-cascades-daotest.read.N--1.spec.js', function () {
     });
   });
 
+  it('should get list A&B (Relation: A 1--N B, Main: B). Cascade: B.a', function (done) {
+    inject(function (MFContextFactory, EmployeeDaoNoSql, EmployeeCascade, MFDalNoSqlProxy) {
+      tx = MFDalNoSqlProxy.openTransaction();
+      var context = MFContextFactory.createInstance();
+      context.dbTransaction = tx;
+
+      EmployeeDaoNoSql._getListRecord(context, [EmployeeCascade.AGENCE]).then(function (entities) {
+        expect(entities).not.toBeNull();
+        if (entities.length) { //
+          expect(entities[2].lastName).toEqual('Lastname3');
+          expect(entities[2].agence).not.toBeNull();
+          expect(entities[2].agence.nom).toEqual('Nom3');
+        }
+
+        done();
+      });
+
+      // Resolve promises and http requests
+      $rootScope.$apply();
+    });
+  });
+
   afterEach(function (done) {
     inject(function (MFDalIndexedDB, MFDalIndexedDBTransaction) {
       waitUntil(function () {

@@ -65,6 +65,27 @@ describe('DAO-cascades-daotest-sql.read.N--1.spec.js', function () {
             });
         });
     });
+
+    fit('should get list A&B (Relation: A N<>--1 B, Main: A). No cascade requested', function (done) {
+        inject(function (MFContextFactory, EmployeeDaoSql, MFDalWebSql, EmployeeCascade) {
+            var context = MFContextFactory.createInstance();
+            MFDalWebSql.dbConnection.transaction(function (t) {
+                context.dbTransaction = t;
+                EmployeeDaoSql.getListEmployee(context, [EmployeeCascade.AGENCE]).then(function (entities) {
+                    expect(entities).not.toBeNull();
+                    if (entities.length) { //
+                        expect(entities[2].lastName).toEqual('Lastname3');
+                        expect(entities[2].agence).not.toBeNull();
+                        expect(entities[2].agence.nom).toEqual('Nom3');
+                    }
+
+                    done();
+                });
+                // Resolve promises and http requests
+                $rootScope.$apply();
+            });
+        });
+    });
     afterEach(function (done) {
         inject(function (MFDalWebSql) {
             MFDalWebSql.closeDatabase();

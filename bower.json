@@ -79,6 +79,7 @@
     "lib/init/MFInitFillInMDKTables.js",
     "lib/init/MFInitFillInUserTables.js",
     "lib/init/MFInitOpenDataBase.js",
+    "lib/init/MFInitUpgradeDB.js",
     "lib/init/manager/MFAbstractInitTask.js",
     "lib/init/manager/MFInitEvent.js",
     "lib/init/manager/MFInitScheduler.js",

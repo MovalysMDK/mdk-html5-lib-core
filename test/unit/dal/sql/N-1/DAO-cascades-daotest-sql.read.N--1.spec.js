@@ -66,7 +66,7 @@ describe('DAO-cascades-daotest-sql.read.N--1.spec.js', function () {
         });
     });
 
-    fit('should get list A&B (Relation: A N<>--1 B, Main: A). No cascade requested', function (done) {
+    it('should get list A&B (Relation: A N<>--1 B, Main: A). No cascade requested', function (done) {
         inject(function (MFContextFactory, EmployeeDaoSql, MFDalWebSql, EmployeeCascade) {
             var context = MFContextFactory.createInstance();
             MFDalWebSql.dbConnection.transaction(function (t) {
